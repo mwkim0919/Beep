@@ -34,33 +34,27 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
+				<form name="playerForm" ng-submit="addPlayer()">
+					<div class="input-group">
+						<select ng-model="playerTeam" class="form-control">
+							<option value="">Free Agent</option>
+							<option ng-repeat="team in teams" value="team">{{team.name}}</option>
+						</select>
+					</div>
+					<div class="input-group">
+						<input type="text" ng-model="playerName" class="form-control" placeholder="Enter a player name..." required />
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit" ng-disabled="playerForm.$invalid">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+						</span>
+					</div>
+				</form>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>Team</th>
 							<th>Name</th>
-						</tr>
-						<tr>
-							<form name="playerForm" ng-submit="addPlayer()">
-								<td>
-									<div class="input-group">
-										<select ng-model="playerTeam" class="form-control" required>
-											<option value="">Free Agent</option>
-											<option ng-repeat="team in teams" value="team">{{team.name}}</option>
-										</select>
-									</div>
-								</td>
-								<td>
-									<div class="input-group">
-										<input type="text" ng-model="playerName" class="form-control" placeholder="Enter a player name..." required />
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit" ng-disabled="playerForm.$invalid">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</span>
-									</div>
-								</td>
-							</form>
 						</tr>
 					</thead>
 					<tbody>
