@@ -1,0 +1,69 @@
+body {
+	background-color: orange;
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	position: relative;
+}
+
+a {
+	color: #00B7FF;
+}
+
+#navlogo {
+	float: left;
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+#logo {
+	width: 100px;
+	height: 100px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.signin-page {
+	position: absolute;
+	padding: 30px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 30%);
+}
+
+.signup-page {
+	position: absolute;
+	padding: 40px;
+    width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 25%);
+}
+
+.home-header {
+	text-align: center;
+}
+
+#signup-button {
+	margin-top: 15px;
+}
+
+.dashboard {
+	margin-top: 70px;
+}
+
+.panel-heading h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    width: 75%;
+    padding-top: 8px;
+}
+
+.input-group {
+	margin-bottom: 13px;
+}

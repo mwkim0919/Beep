@@ -1,0 +1,29 @@
+<div class="thumbnail signup-page">
+	<div class="caption">
+		<img id="logo" src="../images/basketball.jpg" alt="basketball">
+		<h2 class="home-header">Please sign up</h2>
+		<form name="signupForm" ng-submit="signup()">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+					<input type="email" ng-model="register.Email" class="form-control" placeholder="Email" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+					<input type="password" ng-model="register.Password" class="form-control" placeholder="Password" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+					<input type="password" ng-model="register.Confirm" class="form-control" placeholder="Confirm Password" required />
+				</div>
+			</div>
+			<p class="alert-danger" align="center" ng-if="signupPassword != signupConfirm">Please confirm your password.</p>
+			<input type="submit" ng-disabled="signupForm.$invalid || signupPassword != signupConfirm" class="btn btn-success btn-lg btn-block" value="Sign up" />
+		</form>
+		<a href="#/" id="signup-button" class="btn btn-default btn-lg btn-block">Go back to login</a>
+	</div>
+</div>

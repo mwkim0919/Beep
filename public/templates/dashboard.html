@@ -1,0 +1,116 @@
+<div ng-include="'/templates/navbar.html'"></div>
+
+<div class="dashboard">
+	<div class="col-md-4">
+		<div ng-init="getTeams()" class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Teams</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<form ng-submit="addTeam()">
+					<div class="input-group">
+						<input type="text" ng-model="teamName" class="form-control" placeholder="Enter your team name...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+						</span>
+					</div>
+				</form>
+				<div class="list-group">
+					<a href="" ng-repeat="team in teams" class="list-group-item">
+						{{team.name}}
+						<span class="badge">{{team.players.length}}</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Players</h3>
+				<div class="pull-right">
+					<button class="btn btn-default" data-toggle="modal" data-target="#player-form">
+						<span class="glyphicon glyphicon-plus"></span>
+					</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<!-- Table -->
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Age</th>
+						</tr>
+						<tr>
+							<form>
+								<th>
+									<input type="text" class="form-control" />
+								</th>
+								<th>
+									<input type="number" class="form-control" />
+								</th>
+							</form>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="user in data">
+							<td>{{user.name}}</td>
+							<td>{{user.age}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">Panel heading</div>
+			<div class="panel-body">
+				<p>...</p>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<!-- Default panel contents -->
+			<div class="panel-heading">Panel heading</div>
+			<div class="panel-body">
+				<div class="table-responsive">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>GP</th>
+								<th>PTS</th>
+								<th>REB</th>
+								<th>AST</th>
+								<th>STL</th>
+								<th>BLK</th>
+								<th>TOV</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- <div class="modal fade" id="team-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Add your team</h4>
+			</div>
+			<div class="modal-body">
+				<form ng-submit="addTeam()">
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div> -->

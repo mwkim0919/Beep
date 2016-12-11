@@ -1,0 +1,24 @@
+<div class="thumbnail signin-page">
+	<div class="caption">
+		<img id="logo" src="../images/basketball.jpg" alt="basketball">
+		<h2 class="home-header">Welcome to Beep</h2>
+		<p class="alert-danger" ng-if="errorMessage">{{errorMessage}}</p>
+		<p class="alert-success" ng-if="message">{{message}}</p>
+		<form name="loginForm" ng-submit="login()">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-user"></span></div>
+					<input type="email" ng-model="signin.email" class="form-control" placeholder="Email" required />
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></div>
+					<input type="password" ng-model="signin.password" class="form-control" placeholder="Password" required />
+				</div>
+			</div>
+			<input type="submit" ng-disabled="loginForm.$invalid" class="btn btn-default btn-lg btn-block" value="Login" />
+		</form>
+		<a href="#/signup/" id="signup-button" class="btn btn-success btn-lg btn-block">Sign Up</a>
+	</div>
+</div>
