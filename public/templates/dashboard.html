@@ -9,15 +9,17 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
-				<form ng-submit="addTeam()">
+				<form name="teamForm" ng-submit="addTeam()">
 					<div class="input-group">
-						<input type="text" ng-model="teamName" class="form-control" placeholder="Enter your team name...">
+						<input type="text" ng-model="teamName" class="form-control" placeholder="Enter your team name..." required />
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+							<button class="btn btn-default" type="submit" ng-disabled="teamForm.$invalid">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
 						</span>
 					</div>
 				</form>
-				<div class="list-group">
+				<div class="list-group" style="margin-top: 13px;">
 					<a href="" ng-repeat="team in teams" class="list-group-item">
 						{{team.name}}
 						<span class="badge">{{team.players.length}}</span>
@@ -29,36 +31,42 @@
 			<!-- Default panel contents -->
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Players</h3>
-				<div class="pull-right">
-					<button class="btn btn-default" data-toggle="modal" data-target="#player-form">
-						<span class="glyphicon glyphicon-plus"></span>
-					</button>
-				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
-				<!-- Table -->
 				<table class="table">
 					<thead>
 						<tr>
+							<th>Team</th>
 							<th>Name</th>
-							<th>Age</th>
 						</tr>
 						<tr>
-							<form>
-								<th>
-									<input type="text" class="form-control" />
-								</th>
-								<th>
-									<input type="number" class="form-control" />
-								</th>
+							<form name="playerForm" ng-submit="addPlayer()">
+								<td>
+									<div class="input-group">
+										<select ng-model="playerTeam" class="form-control" required>
+											<option value="">Free Agent</option>
+											<option ng-repeat="team in teams" value="team">{{team.name}}</option>
+										</select>
+									</div>
+								</td>
+								<td>
+									<div class="input-group">
+										<input type="text" ng-model="playerName" class="form-control" placeholder="Enter a player name..." required />
+										<span class="input-group-btn">
+											<button class="btn btn-default" type="submit" ng-disabled="playerForm.$invalid">
+												<span class="glyphicon glyphicon-plus"></span>
+											</button>
+										</span>
+									</div>
+								</td>
 							</form>
 						</tr>
 					</thead>
 					<tbody>
-						<tr ng-repeat="user in data">
-							<td>{{user.name}}</td>
-							<td>{{user.age}}</td>
+						<tr ng-repeat="player in players">
+							<td>{{player.name}}</td>
+							<td>{{player.team}}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -5,6 +5,7 @@ var Player = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: 'User'},
 	name: {type: String, required: true},
 	birthdate: {type: Date, required: false},
+	team: {type: Schema.Types.ObjectId, ref: 'Team'},
 	games: [{type: Schema.Types.ObjectId, ref: 'Game'}],
 });
 

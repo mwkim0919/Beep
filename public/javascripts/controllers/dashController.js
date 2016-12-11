@@ -1,14 +1,8 @@
 myApp.controller('dashController', 
-	['$scope', '$location', 'AuthService', 'TeamService',
-	function($scope, $location, AuthService, TeamService) {
+	['$scope', '$location', 'AuthService', 'TeamService', 'PlayerService',
+	function($scope, $location, AuthService, TeamService, PlayerService) {
 		$scope.teams = [];
-		
-		$scope.data = [
-			{name: 'Minwoo Kim', age: 27},
-			{name: 'Ray Kim', age: 27},
-			{name: 'Brian Son', age: 29},
-			{name: 'DK Han', age: 24},
-		];
+		$scope.players = [];
 
 		$scope.getTeams = function() {
 			TeamService.getTeams()
@@ -33,6 +27,18 @@ myApp.controller('dashController',
 				};
 				$scope.teams.push(team);
 			})
+		};
+
+		$scope.addPlayer = function() {
+			PlayerService.addPlayer($scope.playerName, $scope.playerTeam)
+			.then(function(response) {
+				var player = {
+					name: $scope.playerName,
+					team: $scope.playerTeam,
+				};
+				$scope.teams[$scope.teams.indexOf(playerTeam)].players.push(player);
+				$scope.players.push(player);
+			});
 		};
 	}
 ]);
