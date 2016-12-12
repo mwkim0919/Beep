@@ -1,4 +1,4 @@
-var myApp = angular.module('Beep', ['ngRoute']);
+var myApp = angular.module('Beep', ['ngRoute', 'chart.js']);
 
 myApp.config(function ($routeProvider) {
 
