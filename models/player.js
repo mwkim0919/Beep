@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var User = require('../models/user');
+var Team = require('../models/team');
 
 var Player = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -13,7 +15,11 @@ Player.post('remove', function(doc) {
 	var deletedPlayer = doc;
 	console.log(doc);
 	User.findById(doc.user, function(err, doc) {
-		doc.teams.pull(deletedPlayer);
+		doc.players.pull(deletedPlayer);
+		doc.save();
+	});
+	Team.findById(doc.team, function(err, doc) {
+		doc.players.pull(deletedPlayer);
 		doc.save();
 	});
 });

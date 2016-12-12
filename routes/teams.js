@@ -24,7 +24,6 @@ router.post('/', function(req, res, next) {
     var team = new Team({
         user: req.user,
         name: req.body.name,
-        // players: [],
     });
     team.user = req.user;
     team.save(function (err, result) {

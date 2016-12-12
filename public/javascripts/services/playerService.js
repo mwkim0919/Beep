@@ -7,6 +7,7 @@ myApp.factory('PlayerService',
 
     return ({
       getPlayers: getPlayers,
+      getPlayersByTeam: getPlayersByTeam,
       addPlayer: addPlayer,
       removePlayer: removePlayer,
       editPlayer: editPlayer
@@ -21,6 +22,16 @@ myApp.factory('PlayerService',
       // handle error
       .error(function(data) {
         // DO something
+      });
+    }
+
+    function getPlayersByTeam(team) {
+      return $http.get('/players/' + team.id)
+      .success(function(data) {
+
+      })
+      .error(function(data) {
+
       });
     }
 

@@ -4,6 +4,7 @@ var passport = require('passport');
 
 var User = require('../models/user.js');
 var Player = require('../models/player.js');
+var Team = require('../models/team.js');
 
 router.get('/', function(req, res, next) {
     Player.find({user: req.user})
@@ -21,28 +22,57 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.post('/', function(req, res, next) {
-    var player = new Player({
-        user: req.user,
-        name: req.body.name,
-        team: req.body.team,
-        birthdate: req.body.birthdate,
-        games: [],
-    });
-    player.user = req.user;
-    player.save(function (err, result) {
+router.get('/:id', function(req, res, next) {
+    Player.find({team: req.params.id})
+    .exec(function(err, docs) {
         if (err) {
             return res.status(404).json({
                 title: 'An error occurred',
                 error: err
             });
         }
-        req.user.players.push(result);
-        req.user.save();
-        res.status(201).json({
-            message: 'Saved player',
-            obj: result
+        res.status(200).json({
+            message: 'Success',
+            obj: docs
         });
+    });
+});
+
+router.post('/', function(req, res, next) {
+    Team.findById(req.body.team, function(err, doc) {
+        if (err) {
+            return res.status(404).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!doc) {
+
+        }
+        if (doc) {
+            var player = new Player({
+                user: req.user,
+                name: req.body.name,
+                team: doc,
+            });
+            player.save(function(err, result) {
+                if (err) {
+                    return res.status(404).json({
+                        title: 'An error occurred',
+                        error: err
+                    });
+                }
+                console.log('Got Result');
+                doc.players.push(result);
+                console.log('Pusing player result to team');
+                doc.save();
+                console.log('Saving team info');
+                res.status(201).json({
+                    message: 'Saved player',
+                    obj: result
+                });
+            });
+        }
     });
 });
 

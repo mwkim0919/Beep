@@ -26,21 +26,27 @@ a {
 }
 
 .signin-page {
-	position: absolute;
+	/*position: absolute;*/
 	padding: 30px;
     width: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 30%);
+    margin-top: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, 20%);*/
 }
 
 .signup-page {
-	position: absolute;
+	/*position: absolute;*/
 	padding: 40px;
     width: 400px;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 25%);
+    margin-top: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    /*top: 50%;*/
+    /*left: 50%;*/
+    /*transform: translate(-50%, 20%);*/
 }
 
 .home-header {
