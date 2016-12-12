@@ -1,0 +1,105 @@
+<div ng-include="'/templates/navbar.html'"></div>
+
+<div class="dashboard" ng-controller="dashController">
+	<div class="col-md-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Home</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<th ng-repeat="label in labels">
+							{{label}}
+						</th>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-2">
+		<div ng-init="getTeams()" class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Teams</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<div class="list-group" style="margin-top: 13px;">
+					<a href="" class="list-group-item clearfix" ng-repeat="(id, team) in teams" ng-click="getPlayersByTeam(team)">
+						{{team.name}}
+						<span class="pull-right">
+							<span class="badge" style="margin-right: 15px;">{{team.players.length}}</span>
+							<!-- <button class="btn btn-xs btn-info" ng-click="editTeam(team)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button class="btn btn-xs btn-danger" ng-click="removeTeam(team)">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button> -->
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Players <span ng-if="team">in</span> {{team.name}}</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th style="text-align: center;"></th>
+							<th style="text-align: center;">Name</th>
+							<th style="text-align: center;"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="scorePlayer" ng-repeat="player in players">
+							<td>
+								<button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</button>
+							</td>
+							<td style="vertical-align: middle;">{{player.name}}</td>
+							<td>
+								<button class="btn btn-sm btn-danger" ng-click="editPlayer(player)">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+							</td>
+							<!-- <td>
+								<button class="btn btn-sm btn-default" ng-click="editPlayer(player)">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+								<button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</button>
+								<button class="btn btn-sm btn-danger" ng-click="removePlayer(player)">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+							</td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-5">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Away</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<th ng-repeat="label in labels">
+							{{label}}
+						</th>
+					</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

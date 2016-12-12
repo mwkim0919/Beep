@@ -90,12 +90,22 @@ myApp.controller('dashController',
 			});
 		};
 
-		$scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-		$scope.series = ['Series A', 'Series B'];
-
+		$scope.labels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];
 		$scope.data = [
-			[65, 59, 80, 81, 56, 55, 40],
-			[28, 48, 40, 19, 86, 27, 90]
+			[65, 59, 90, 81, 56, 55, 40],
+			[28, 48, 40, 19, 96, 27, 100]
 		];
+		$scope.series = ["Player A", "AVERAGE"];
+		$scope.options = {
+			legend: {
+				display: true,
+				position: "top",
+			},
+			scale: {
+                ticks: {
+                    beginAtZero: true
+                }
+            },
+		};
 	}
 ]);

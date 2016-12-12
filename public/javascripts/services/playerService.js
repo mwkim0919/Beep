@@ -39,7 +39,7 @@ myApp.factory('PlayerService',
       return $http.post('/players',
         {
           name: name,
-          team: team ? team : null, 
+          team: team != "free" ? team : "null", 
         }
       )
       // handle success

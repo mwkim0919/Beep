@@ -16,14 +16,14 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#/dashboard/">Dashboard <span class="sr-only">(current)</span></a></li>
-        <li><a href="">Scorekeep</a></li>
+      <ul class="nav navbar-nav" id="navitem">
+        <li id="dashboard"><a href="#/dashboard/">Dashboard <span class="sr-only">(current)</span></a></li>
+        <li id="scorekeep"><a href="#/scorekeep/">Scorekeep</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="">Welcome {{current_user}}</a></li>
         <li><a href="" ng-click="logout()">Sign Out</a></li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>

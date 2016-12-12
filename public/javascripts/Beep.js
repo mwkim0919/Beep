@@ -26,11 +26,11 @@ myApp.config(function ($routeProvider) {
     access: {restricted: true}
   })
 
-  // .when('/transactions', {
-  //   templateUrl: 'templates/transactions.html',
-  //   controller: 'transactionController',
-  //   access: {restricted: true}
-  // })
+  .when('/scorekeep', {
+    templateUrl: 'templates/scorekeep.html',
+    // controller: 'transactionController',
+    access: {restricted: true}
+  })
 
   // .when('/schedules', {
   //   templateUrl: 'templates/schedule.html',

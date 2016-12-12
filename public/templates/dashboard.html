@@ -3,7 +3,6 @@
 <div class="dashboard">
 	<div class="col-md-4">
 		<div ng-init="getTeams()" class="panel panel-default">
-			<!-- Default panel contents -->
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Teams</h3>
 				<div class="clearfix"></div>
@@ -23,7 +22,10 @@
 					<a href="" class="list-group-item clearfix" ng-repeat="(id, team) in teams" ng-click="getPlayersByTeam(team)">
 						{{team.name}}
 						<span class="pull-right">
-							<span class="badge">{{team.players.length}}</span>
+							<span class="badge" style="margin-right: 15px;">{{team.players.length}}</span>
+							<button class="btn btn-xs btn-info" ng-click="editTeam(team)">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
 							<button class="btn btn-xs btn-danger" ng-click="removeTeam(team)">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
@@ -33,20 +35,18 @@
 			</div>
 		</div>
 		<div class="panel panel-default">
-			<!-- Default panel contents -->
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Players <span ng-if="team">in</span> {{team.name}}</h3>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
 				<form name="playerForm" ng-submit="addPlayer()" class="form-inline">
-					<div class="input-group col-md-5">
-						<select ng-model="playerTeam" class="form-control">
-							<option value="">Free Agent</option>
+					<div class="input-group">
+						<select ng-model="playerTeam" class="form-control" required>
 							<option ng-repeat="team in teams" value="{{team.id}}">{{team.name}}</option>
 						</select>
 					</div>
-					<div class="input-group col-md-6">
+					<div class="input-group">
 						<input type="text" ng-model="playerName" class="form-control" placeholder="Player name" required />
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="submit" ng-disabled="playerForm.$invalid">
@@ -68,10 +68,13 @@
 							<td>{{team.name}}</td>
 							<td>{{player.name}}</td>
 							<td>
-								<button class="btn btn-xs btn-info" ng-click="editPlayer(player)">
+								<button class="btn btn-sm btn-default" ng-click="editPlayer(player)">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+								<button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
 									<span class="glyphicon glyphicon-pencil"></span>
 								</button>
-								<button class="btn btn-xs btn-danger" ng-click="removePlayer(player)">
+								<button class="btn btn-sm btn-danger" ng-click="removePlayer(player)">
 									<span class="glyphicon glyphicon-remove"></span>
 								</button>
 							</td>
@@ -83,16 +86,10 @@
 	</div>
 	<div class="col-md-8">
 		<div class="panel panel-default">
-			<!-- Default panel contents -->
-			<div class="panel-heading">Panel heading</div>
-			<div class="panel-body">
-				<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series">
-				</canvas>
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Stats</h3>
+				<div class="clearfix"></div>
 			</div>
-		</div>
-		<div class="panel panel-default">
-			<!-- Default panel contents -->
-			<div class="panel-heading">Panel heading</div>
 			<div class="panel-body">
 				<div class="table-responsive">
 					<table class="table table-hover">
@@ -105,12 +102,29 @@
 								<th>STL</th>
 								<th>BLK</th>
 								<th>TOV</th>
+								<th>FGM</th>
+								<th>FGA</th>
+								<th>FG%</th>
+								<th>3PM</th>
+								<th>3PA</th>
+								<th>3P%</th>
+								<th>OREB</th>
+								<th>DREB</th>
 							</tr>
 						</thead>
 						<tbody>
 						</tbody>
 					</table>
 				</div>
+			</div>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Attribute Chart</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" height="120"></canvas> 
 			</div>
 		</div>
 	</div>

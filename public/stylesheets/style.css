@@ -69,3 +69,7 @@ a {
     width: 75%;
     padding-top: 8px;
 }
+
+.scorePlayer td{
+    text-align: center;
+}

@@ -47,7 +47,19 @@ router.post('/', function(req, res, next) {
             });
         }
         if (!doc) {
-
+            console.log("No team found for the player");
+            var player = new Player({
+                user: req.user,
+                name: req.body.name,
+            });
+            player.save(function(err, result) {
+                if (err) {
+                    return res.status(404).json({
+                        title: 'An error occurred',
+                        error: err
+                    });
+                }
+            });
         }
         if (doc) {
             var player = new Player({
@@ -62,11 +74,8 @@ router.post('/', function(req, res, next) {
                         error: err
                     });
                 }
-                console.log('Got Result');
                 doc.players.push(result);
-                console.log('Pusing player result to team');
                 doc.save();
-                console.log('Saving team info');
                 res.status(201).json({
                     message: 'Saved player',
                     obj: result
