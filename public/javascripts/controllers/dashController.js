@@ -3,8 +3,8 @@ myApp.controller('dashController',
 	function($scope, $location, AuthService, TeamService, PlayerService) {
 		$scope.teams = {};
 		$scope.team = null;
-		$scope.players = [];
-
+		$scope.players = {};
+		$scope.statLabels = ["Name", "GP", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", "OREB", "DREB"];
 		$scope.getTeams = function() {
 			TeamService.getTeams()
 			.then(function(response) {
@@ -22,16 +22,18 @@ myApp.controller('dashController',
 		$scope.getPlayersByTeam = function(team) {
 			PlayerService.getPlayersByTeam(team)
 			.then(function(response) {
-				$scope.players.splice(0, $scope.players.length);
+				delete $scope.players;
+				$scope.players = {};
 				for (var i = 0; i < response.data.obj.length; i++) {
 					var player = {
 						id: response.data.obj[i]._id,
 						name: response.data.obj[i].name,
 						games: response.data.obj[i].games,
 					};
-					$scope.players.push(player);
-					$scope.team = team;
+					// $scope.players.push(player);
+					$scope.players[player.id] = player;
 				}
+				$scope.team = team;
 			});
 		}
 
@@ -82,12 +84,15 @@ myApp.controller('dashController',
 		};
 
 		$scope.removePlayer = function(player) {
-			PlayerService.removePlayer(player.id)
-			.then(function(response) {
-				var teamId = response.data.obj.team;
-				$scope.players.splice($scope.players.indexOf(player), 1);
-				$scope.teams[teamId].players.splice($scope.teams[teamId].players.indexOf(player.id), 1);
-			});
+			var r = confirm("Are you sure that you want to delete this player?\nAll information in this player will be deleted.");
+			if (r == true) {
+				PlayerService.removePlayer(player.id)
+				.then(function(response) {
+					var teamId = response.data.obj.team;
+					$scope.players.splice($scope.players.indexOf(player), 1);
+					$scope.teams[teamId].players.splice($scope.teams[teamId].players.indexOf(player.id), 1);
+				});
+			}
 		};
 
 		$scope.labels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];

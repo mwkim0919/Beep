@@ -28,7 +28,7 @@ myApp.config(function ($routeProvider) {
 
   .when('/scorekeep', {
     templateUrl: 'templates/scorekeep.html',
-    // controller: 'transactionController',
+    controller: 'scoreController',
     access: {restricted: true}
   })
 

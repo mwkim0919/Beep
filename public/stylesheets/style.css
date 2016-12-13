@@ -70,6 +70,12 @@ a {
     padding-top: 8px;
 }
 
-.scorePlayer td{
+td {
     text-align: center;
+    vertical-align: middle;
+}
+
+.playerTable th, tr {
+    text-align: center;
+    vertical-align: middle;
 }
