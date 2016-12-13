@@ -112,6 +112,10 @@ router.delete('/:id', function(req, res, next) {
                     error: err
                 });
             }
+            Team.findById(result.team, function(err, doc) {
+                doc.players.pull(result);
+                doc.save();
+            });
             res.status(200).json({
                 message: 'Success',
                 obj: result

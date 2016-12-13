@@ -56,7 +56,6 @@ myApp.controller('dashController',
 				TeamService.removeTeam(team.id)
 				.then(function(response) {
 					if ($scope.team == team) {
-						$scope.players.splice(0, $scope.players.length);
 						$scope.team = null;
 					}
 					delete $scope.teams[team.id];
@@ -68,6 +67,7 @@ myApp.controller('dashController',
 			PlayerService.addPlayer($scope.playerName, $scope.playerTeam)
 			.then(function(response) {
 				var player = {
+					id: response.data.obj._id,
 					name: $scope.playerName,
 					team: $scope.playerTeam ? $scope.playerTeam : null,
 					games: [],
@@ -76,7 +76,7 @@ myApp.controller('dashController',
 					$scope.teams[$scope.playerTeam].players.push(player);
 				}
 				if ($scope.team == $scope.teams[$scope.playerTeam]) {
-					$scope.players.push(player);
+					$scope.players[player.id] = player;
 				}
 				$scope.playerName = "";
 				$scope.playerTeam = "";
@@ -89,7 +89,7 @@ myApp.controller('dashController',
 				PlayerService.removePlayer(player.id)
 				.then(function(response) {
 					var teamId = response.data.obj.team;
-					$scope.players.splice($scope.players.indexOf(player), 1);
+					delete $scope.players[player.id]
 					$scope.teams[teamId].players.splice($scope.teams[teamId].players.indexOf(player.id), 1);
 				});
 			}

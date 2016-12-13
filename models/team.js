@@ -11,7 +11,6 @@ var Team = new Schema({
 
 Team.post('remove', function(doc) {
 	var deletedTeam = doc;
-	console.log(doc);
 	User.findById(doc.user, function(err, doc) {
 		doc.teams.pull(deletedTeam);
 		doc.save();

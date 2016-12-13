@@ -13,12 +13,7 @@ var Player = new Schema({
 
 Player.post('remove', function(doc) {
 	var deletedPlayer = doc;
-	console.log(doc);
 	User.findById(doc.user, function(err, doc) {
-		doc.players.pull(deletedPlayer);
-		doc.save();
-	});
-	Team.findById(doc.team, function(err, doc) {
 		doc.players.pull(deletedPlayer);
 		doc.save();
 	});
