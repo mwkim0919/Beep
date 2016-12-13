@@ -3,7 +3,8 @@ myApp.controller('scoreController',
 	function($scope, $location, AuthService, TeamService, PlayerService) {
 		$scope.homePlayer = {};
 		$scope.homeStat = {};
-		$scope.away = {};
+		$scope.awayPlayer = {};
+		$scope.awayStat = {};
 		$scope.statLabels = ["Name", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%"];
 		
 		function increment(array, id, index) {
@@ -68,21 +69,26 @@ myApp.controller('scoreController',
 			}
 		}
 
-		$scope.addHome = function(player) {
-			$scope.homePlayer[player.id] = player;
-			$scope.homeStat[player.id] = [0,0,0,0,0,0,0,0,0,0,0,0];
+		$scope.add = function(array1, array2, player) {
+			array1[player.id] = player;
+			array2[player.id] = [0,0,0,0,0,0,0,0,0,0,0,0];
 		};
 
-		$scope.increment = function(id, index) {
-			increment($scope.homeStat, id, index);
+		$scope.remove = function(array, player) {
+			delete array[player.id];
+		}
+
+		$scope.increment = function(array, id, index) {
+			increment(array, id, index);
 		};
 
-		$scope.decrement = function(id, index) {
-			decrement($scope.homeStat, id, index);
+		$scope.decrement = function(array, id, index) {
+			decrement(array, id, index);
 		};
 
-		$scope.checkGoalAttempt = function(array, id) {
-			return array[id][6] == array[id][7] || array[id][9] == array[id][10];
+		$scope.checkGoalAttempt = function(array, id, index) {
+			var fg = array[id][6] == array[id][7];
+			return fg;
 		};
 	}
 ]);

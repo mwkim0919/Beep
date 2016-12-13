@@ -21,7 +21,7 @@
 							<tr ng-repeat="(id, player) in homePlayer" class="scorePlayer">
 								<td>
 									<div>{{player.name}}</div>
-									<button class="btn btn-xs btn-danger" ng-click="removeHome(player)">
+									<button class="btn btn-xs btn-danger" ng-click="remove(homePlayer, player)">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</td>
@@ -30,7 +30,7 @@
 										<span class="glyphicon glyphicon-arrow-up"></span>
 									</button>
 									<div>{{rec}}</div>
-									<button ng-hide="$index == 8 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(id, $index)" ng-disabled="homeStat[id][$index] == 0">
+									<button ng-hide="$index == 8 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(id, $index)" ng-disabled="homeStat[id][$index] == 0 || checkGoalAttempt(homeStat, id, $index">
 										<span class="glyphicon glyphicon-arrow-down"></span>
 									</button>
 								</td>
@@ -77,13 +77,13 @@
 					<tbody>
 						<tr class="scorePlayer" ng-repeat="(id, player) in players">
 							<td>
-								<button class="btn btn-sm btn-primary" ng-click="addHome(player)">
+								<button class="btn btn-sm btn-primary" ng-click="add(homePlayer, homeStat, player)">
 									<span class="glyphicon glyphicon-home"></span>
 								</button>
 							</td>
 							<td style="vertical-align: middle;">{{player.name}}</td>
 							<td>
-								<button class="btn btn-sm btn-danger" ng-click="editPlayer(player)">
+								<button class="btn btn-sm btn-danger" ng-click="add(awayPlayer, awayStat, player)">
 									<span class="glyphicon glyphicon-new-window"></span>
 								</button>
 							</td>
@@ -110,14 +110,14 @@
 							</th>
 						</thead>
 						<tbody>
-							<tr ng-repeat="(id, player) in homePlayer" class="scorePlayer">
+							<tr ng-repeat="(id, player) in awayPlayer" class="scorePlayer">
 								<td>
 									<div>{{player.name}}</div>
-									<button class="btn btn-xs btn-danger" ng-click="removeAway(player)">
+									<button class="btn btn-xs btn-danger" ng-click="remove(awayPlayer, player)">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</td>
-								<td ng-repeat="rec in homeStat[id] track by $index">
+								<td ng-repeat="rec in awayStat[id] track by $index">
 									<button class="btn btn-xs btn-primary" ng-click="increment(rec)">
 										<span class="glyphicon glyphicon-arrow-up"></span>
 									</button>
