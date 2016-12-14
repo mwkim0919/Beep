@@ -1,10 +1,11 @@
 myApp.controller('dashController', 
-	['$scope', '$location', 'AuthService', 'TeamService', 'PlayerService',
-	function($scope, $location, AuthService, TeamService, PlayerService) {
+	['$scope', '$location', 'AuthService', 'TeamService', 'PlayerService', 'GameService',
+	function($scope, $location, AuthService, TeamService, PlayerService, GameService) {
 		$scope.teams = {};
 		$scope.team = null;
 		$scope.players = {};
-		$scope.statLabels = ["Name", "GP", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", "OREB", "DREB"];
+		$scope.statLabels = ["Name", "GP", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", ""];
+		$scope.stats = {};
 		$scope.getTeams = function() {
 			TeamService.getTeams()
 			.then(function(response) {
@@ -30,12 +31,47 @@ myApp.controller('dashController',
 						name: response.data.obj[i].name,
 						games: response.data.obj[i].games,
 					};
-					// $scope.players.push(player);
 					$scope.players[player.id] = player;
 				}
 				$scope.team = team;
 			});
-		}
+		};
+
+		$scope.addPlayerStat = function(player) {
+			GameService.getGamesByPlayer(player)
+			.then(function(response) {
+				var gp=0, pts=0, reb=0, ast=0, stl=0, blk=0, tov=0, fgm=0, fga=0, fgp=0, tpm=0, tpa=0, tpp=0;
+				for (var i = 0; i < response.data.obj.length; i++) {
+					gp += 1;
+					pts += response.data.obj[i].pts;
+					reb += response.data.obj[i].reb;
+					ast += response.data.obj[i].ast;
+					stl += response.data.obj[i].stl;
+					blk += response.data.obj[i].blk;
+					tov += response.data.obj[i].tov;
+					fgm += response.data.obj[i].fgm;
+					fga += response.data.obj[i].fga;
+					tpm += response.data.obj[i].tpm;
+					tpa += response.data.obj[i].tpa;
+				}
+				if (gp != 0) {
+					pts = (pts / gp).toFixed(1);
+					reb = (reb / gp).toFixed(1);
+					ast = (ast / gp).toFixed(1);
+					stl = (stl / gp).toFixed(1);
+					blk = (blk / gp).toFixed(1);
+					tov = (tov / gp).toFixed(1);
+				}
+				fgp = fga != 0 ? (fgm / fga).toFixed(3) : 0;
+				tpp = tpa != 0 ? (tpm / tpa).toFixed(3) : 0;
+				var stat = [player.name, gp, pts, reb, ast, stl, blk, tov, fgm, fga, fgp, tpm, tpa, tpp];
+				$scope.stats[player.id] = stat;
+			});
+		};
+
+		$scope.removePlayerStat = function(id) {
+			delete $scope.stats[id];
+		};
 
 		$scope.addTeam = function() {
 			TeamService.addTeam($scope.teamName)
@@ -89,19 +125,20 @@ myApp.controller('dashController',
 				PlayerService.removePlayer(player.id)
 				.then(function(response) {
 					var teamId = response.data.obj.team;
-					delete $scope.players[player.id]
+					delete $scope.players[player.id];
+					delete $scope.stats[player.id];
 					$scope.teams[teamId].players.splice($scope.teams[teamId].players.indexOf(player.id), 1);
 				});
 			}
 		};
 
-		$scope.labels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];
-		$scope.data = [
+		$scope.radarLabels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];
+		$scope.radarData = [
 			[65, 59, 90, 81, 56, 55, 40],
 			[28, 48, 40, 19, 96, 27, 100]
 		];
-		$scope.series = ["Player A", "AVERAGE"];
-		$scope.options = {
+		$scope.radarSeries = ["Player A", "AVERAGE"];
+		$scope.radarOptions = {
 			legend: {
 				display: true,
 				position: "top",
@@ -111,6 +148,21 @@ myApp.controller('dashController',
                     beginAtZero: true
                 }
             },
+		};
+
+		$scope.labels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];
+		$scope.series = ['Series A', 'Series B'];
+
+		$scope.data = [
+			[65, 59, 80, 81, 56, 55, 40],
+			[28, 48, 40, 19, 86, 27, 90]
+		];
+
+		$scope.barOptions = {
+			legend: {
+				display: true,
+				position: "top",
+			}
 		};
 	}
 ]);

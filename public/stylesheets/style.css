@@ -70,12 +70,7 @@ a {
     padding-top: 8px;
 }
 
-td {
-    text-align: center;
-    vertical-align: middle;
-}
-
-.playerTable th, tr {
+th, tr, td {
     text-align: center;
     vertical-align: middle;
 }

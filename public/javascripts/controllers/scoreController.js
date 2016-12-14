@@ -24,24 +24,24 @@ myApp.controller('scoreController',
 			if (index == 6) {
 				fgm = ++array[id][index];
 				fga = ++array[id][index+1];
-				array[id][8] = Math.round(fgm / fga * 100);
+				array[id][8] = (fgm / fga).toFixed(3);
 				array[id][0] += 2;
 			} else if (index == 7) {
 				fga = ++array[id][index];
-				array[id][8] = Math.round(fgm / fga * 100);
+				array[id][8] = (fgm / fga).toFixed(3);
 			} else if (index == 9) {
 				tpm = ++array[id][index];
 				tpa = ++array[id][index+1];
 				fgm = ++array[id][6];
 				fga = ++array[id][7];
-				array[id][11] = Math.round(tpm / tpa * 100);
-				array[id][8] = Math.round(fgm / fga * 100);
+				array[id][11] = (tpm / tpa).toFixed(3);
+				array[id][8] = (fgm / fga).toFixed(3);
 				array[id][0] += 3;
 			} else if (index == 10) {
 				tpa = ++array[id][index];
 				fga = ++array[id][7];
-				array[id][11] = Math.round(tpm / tpa * 100);
-				array[id][8] = Math.round(fgm / fga * 100);
+				array[id][11] = (tpm / tpa).toFixed(3);
+				array[id][8] = (fgm / fga).toFixed(3);
 			} else {
 				array[id][index]++;
 			}
@@ -55,24 +55,24 @@ myApp.controller('scoreController',
 			if (index == 6) {
 				fgm = --array[id][index];
 				fga = --array[id][index+1];
-				array[id][8] = isNaN(Math.round(fgm / fga * 100)) ? 0 : Math.round(fgm / fga * 100);
+				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 				array[id][0] -= 2;
 			} else if (index == 7) {
 				fga = --array[id][index];
-				array[id][8] = isNaN(Math.round(fgm / fga * 100)) ? 0 : Math.round(fgm / fga * 100);
+				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 			} else if (index == 9) {
 				tpm = --array[id][index];
 				tpa = --array[id][index+1];
 				fgm = --array[id][6];
 				fga = --array[id][7];
-				array[id][11] = isNaN(Math.round(tpm / tpa * 100)) ? 0 : Math.round(tpm / tpa * 100);
-				array[id][8] = isNaN(Math.round(fgm / fga * 100)) ? 0 : Math.round(fgm / fga * 100);
+				array[id][11] = isNaN((tpm / tpa).toFixed(3)) ? 0 : (tpm / tpa).toFixed(3);
+				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 				array[id][0] -= 3;
 			} else if (index == 10) {
 				tpa = --array[id][index];
 				fga = --array[id][7];
-				array[id][11] = isNaN(Math.round(tpm / tpa * 100)) ? 0 : Math.round(tpm / tpa * 100);
-				array[id][8] = isNaN(Math.round(fgm / fga * 100)) ? 0 : Math.round(fgm / fga * 100);
+				array[id][11] = isNaN((tpm / tpa).toFixed(3)) ? 0 : (tpm / tpa).toFixed(3);
+				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 			} else {
 				array[id][index]--;
 			}
@@ -103,17 +103,25 @@ myApp.controller('scoreController',
 
 		$scope.submit = function() {
 			for (var index in $scope.homePlayer) {
-				GameService.addGame($scope.homePlayer[index], $scope.homeStat[index])
+				GameService.addGame(index, $scope.homeStat[index])
 				.then(function(response) {
 
 				});
 			}
+			delete $scope.homePlayer;
+			delete $scope.homeStat;
+			$scope.homePlayer = {};
+			$scope.homeStat = {};
 			for (var index in $scope.awayPlayer) {
-				GameService.addGame($scope.awayPlayer[index], $scope.awayStat[index])
+				GameService.addGame(index, $scope.awayStat[index])
 				.then(function(response) {
-
+					
 				});
 			}
+			delete $scope.awayPlayer;
+			delete $scope.awayStat;
+			$scope.awayPlayer = {};
+			$scope.awayStat = {};
 		}
 	}
 ]);

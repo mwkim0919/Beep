@@ -7,7 +7,7 @@ myApp.factory('GameService',
 
     return ({
       getGames: getGames,
-      getGamesByTeam: getGamesByTeam,
+      getGamesByPlayer: getGamesByPlayer,
       addGame: addGame,
       removeGame: removeGame,
       editGame: editGame
@@ -25,7 +25,7 @@ myApp.factory('GameService',
       });
     }
 
-    function getGamesByTeam(player) {
+    function getGamesByPlayer(player) {
       return $http.get('/games/' + player.id)
       .success(function(data) {
 
@@ -49,8 +49,8 @@ myApp.factory('GameService',
           tov: array[5],
           fgm: array[6],
           fga: array[7],
-          tpm: array[8],
-          tpa: array[9],
+          tpm: array[9],
+          tpa: array[10],
           min: null,
         }
       )

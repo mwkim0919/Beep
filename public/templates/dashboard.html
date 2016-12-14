@@ -66,10 +66,10 @@
 						</thead>
 						<tbody>
 							<tr ng-repeat="(id, player) in players">
-								<td>{{team.name}}</td>
-								<td>{{player.name}}</td>
+								<td style="vertical-align: middle;">{{team.name}}</td>
+								<td style="vertical-align: middle;">{{player.name}}</td>
 								<td>
-									<button class="btn btn-sm btn-default" ng-click="editPlayer(player)">
+									<button class="btn btn-sm btn-default" ng-click="addPlayerStat(player)">
 										<span class="glyphicon glyphicon-search"></span>
 									</button>
 									<button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
@@ -87,6 +87,41 @@
 		</div>
 	</div>
 	<div class="col-md-8">
+		<div class="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title pull-left">Attribute Chart</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" height="300"></canvas> 
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title pull-left">Attribute Chart</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						<canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="barOptions" height="300"></canvas>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title pull-left">Attribute Chart</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" height="300"></canvas> 
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Stats</h3>
@@ -101,18 +136,19 @@
 							</tr>
 						</thead>
 						<tbody>
+							<tr ng-repeat="(id, stat) in stats">
+								<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index">
+									{{rec}}
+								</td>
+								<td>
+									<button class="btn btn-sm btn-danger" ng-click="removePlayerStat(id)">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
-			</div>
-		</div>
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3 class="panel-title pull-left">Attribute Chart</h3>
-				<div class="clearfix"></div>
-			</div>
-			<div class="panel-body">
-				<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" height="120"></canvas> 
 			</div>
 		</div>
 	</div>

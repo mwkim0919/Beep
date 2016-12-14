@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var Game = new Schema({
 	player: {type: Schema.Types.ObjectId, ref: 'Player', required: true},
-	date: {type: Date, required: true},
+	date: {type: Date, required: false},
 	opponent: {type: Schema.Types.ObjectId, ref: 'Team', required: false},
 	pts: {type: Number, required: true},
 	reb: {type: Number, required: true},
@@ -16,7 +16,7 @@ var Game = new Schema({
 	fga: {type: Number, required: true},
 	tpm: {type: Number, required: true},
 	tpa: {type: Number, required: true},
-	min: {type: Number, required: true},
+	min: {type: Number, required: false},
 });
 
 // Game.post('remove', function(doc) {
