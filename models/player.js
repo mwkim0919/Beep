@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var User = require('../models/user');
 var Team = require('../models/team');
+var Game = require('../models/game');
 
 var Player = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: 'User'},
@@ -17,6 +18,11 @@ Player.post('remove', function(doc) {
 		doc.players.pull(deletedPlayer);
 		doc.save();
 	});
+});
+
+Player.pre('remove', function(next) {
+    // Remove all the assignment docs that reference the removed person.
+    this.model('Game').remove({ player: this._id }, next);
 });
 
 module.exports = mongoose.model('Player', Player);

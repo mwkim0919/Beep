@@ -26,11 +26,11 @@
 									</button>
 								</td>
 								<td ng-repeat="rec in homeStat[id] track by $index" style="vertical-align: middle;">
-									<button ng-hide="$index == 8 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(id, $index)">
+									<button ng-hide="$index == 8 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(homeStat, id, $index)">
 										<span class="glyphicon glyphicon-arrow-up"></span>
 									</button>
 									<div>{{rec}}</div>
-									<button ng-hide="$index == 8 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(id, $index)" ng-disabled="homeStat[id][$index] == 0 || checkGoalAttempt(homeStat, id, $index">
+									<button ng-hide="$index == 8 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(homeStat, id, $index)" ng-disabled="homeStat[id][$index] == 0 || checkGoalAttempt(homeStat, id, $index)">
 										<span class="glyphicon glyphicon-arrow-down"></span>
 									</button>
 								</td>
@@ -58,6 +58,7 @@
 				</div>
 			</div>
 		</div>
+		<button type="button" class="btn btn-danger btn-lg btn-block" ng-disabled="isEmpty(homePlayer) && isEmpty(awayPlayer)" style="margin-bottom: 20px;">Submit</button>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Players 
@@ -117,12 +118,12 @@
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</td>
-								<td ng-repeat="rec in awayStat[id] track by $index">
-									<button class="btn btn-xs btn-primary" ng-click="increment(rec)">
+								<td ng-repeat="rec in awayStat[id] track by $index" style="vertical-align: middle;">
+									<button ng-hide="$index == 8 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(awayStat, id, $index)">
 										<span class="glyphicon glyphicon-arrow-up"></span>
 									</button>
 									<div>{{rec}}</div>
-									<button class="btn btn-xs btn-danger" ng-click="decrement(rec)">
+									<button ng-hide="$index == 8 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(awayStat, id, $index)" ng-disabled="awayStat[id][$index] == 0 || checkGoalAttempt(awayStat, id, $index)">
 										<span class="glyphicon glyphicon-arrow-down"></span>
 									</button>
 								</td>

@@ -1,12 +1,21 @@
 myApp.controller('scoreController', 
-	['$scope', '$location', 'AuthService', 'TeamService', 'PlayerService',
-	function($scope, $location, AuthService, TeamService, PlayerService) {
+	['$scope', '$location', 'TeamService', 'PlayerService', 'GameService',
+	function($scope, $location, TeamService, PlayerService, GameService) {
 		$scope.homePlayer = {};
 		$scope.homeStat = {};
 		$scope.awayPlayer = {};
 		$scope.awayStat = {};
 		$scope.statLabels = ["Name", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%"];
 		
+		$scope.isEmpty = function(map) {
+			for(var key in map) {
+				if (map.hasOwnProperty(key)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
 		function increment(array, id, index) {
 			var fgm = array[id][6];
 			var fga = array[id][7];
@@ -87,8 +96,24 @@ myApp.controller('scoreController',
 		};
 
 		$scope.checkGoalAttempt = function(array, id, index) {
-			var fg = array[id][6] == array[id][7];
-			return fg;
+			var fg = array[id][6] == array[id][7] && index == 7;
+			var tg = array[id][9] == array[id][10] && index == 10;
+			return fg || tg;
 		};
+
+		$scope.submit = function() {
+			for (var index in $scope.homePlayer) {
+				GameService.addGame($scope.homePlayer[index], $scope.homeStat[index])
+				.then(function(response) {
+
+				});
+			}
+			for (var index in $scope.awayPlayer) {
+				GameService.addGame($scope.awayPlayer[index], $scope.awayStat[index])
+				.then(function(response) {
+
+				});
+			}
+		}
 	}
 ]);
