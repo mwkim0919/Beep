@@ -4,8 +4,9 @@ myApp.controller('dashController',
 		$scope.teams = {};
 		$scope.team = null;
 		$scope.players = {};
-		$scope.statLabels = ["Name", "GP", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", ""];
+		$scope.statLabels = ["Name", "Team", "GP", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%", ""];
 		$scope.stats = {};
+
 		$scope.getTeams = function() {
 			TeamService.getTeams()
 			.then(function(response) {
@@ -30,10 +31,40 @@ myApp.controller('dashController',
 						id: response.data.obj[i]._id,
 						name: response.data.obj[i].name,
 						games: response.data.obj[i].games,
+						team: team,
 					};
 					$scope.players[player.id] = player;
 				}
 				$scope.team = team;
+			});
+			TeamService.getTeamStat(team)
+			.then(function(response) {
+				var gp=0, pts=0, reb=0, ast=0, stl=0, blk=0, tov=0, fgm=0, fga=0, fgp=0, tpm=0, tpa=0, tpp=0;
+				for (var i = 0; i < response.data.obj.length; i++) {
+					gp += 1;
+					pts += response.data.obj[i].pts;
+					reb += response.data.obj[i].reb;
+					ast += response.data.obj[i].ast;
+					stl += response.data.obj[i].stl;
+					blk += response.data.obj[i].blk;
+					tov += response.data.obj[i].tov;
+					fgm += response.data.obj[i].fgm;
+					fga += response.data.obj[i].fga;
+					tpm += response.data.obj[i].tpm;
+					tpa += response.data.obj[i].tpa;
+				}
+				if (gp != 0) {
+					pts = (pts / gp).toFixed(1);
+					reb = (reb / gp).toFixed(1);
+					ast = (ast / gp).toFixed(1);
+					stl = (stl / gp).toFixed(1);
+					blk = (blk / gp).toFixed(1);
+					tov = (tov / gp).toFixed(1);
+				}
+				fgp = fga != 0 ? (fgm / fga).toFixed(3) : 0;
+				tpp = tpa != 0 ? (tpm / tpa).toFixed(3) : 0;
+				var stat = ["-", team.name, "-", pts, reb, ast, stl, blk, tov, fgm, fga, fgp, tpm, tpa, tpp];
+				$scope.stats[team.id] = stat;
 			});
 		};
 
@@ -64,12 +95,12 @@ myApp.controller('dashController',
 				}
 				fgp = fga != 0 ? (fgm / fga).toFixed(3) : 0;
 				tpp = tpa != 0 ? (tpm / tpa).toFixed(3) : 0;
-				var stat = [player.name, gp, pts, reb, ast, stl, blk, tov, fgm, fga, fgp, tpm, tpa, tpp];
+				var stat = [player.name, player.team.name, gp, pts, reb, ast, stl, blk, tov, fgm, fga, fgp, tpm, tpa, tpp];
 				$scope.stats[player.id] = stat;
 			});
 		};
 
-		$scope.removePlayerStat = function(id) {
+		$scope.removeStat = function(id) {
 			delete $scope.stats[id];
 		};
 
@@ -95,6 +126,11 @@ myApp.controller('dashController',
 						$scope.team = null;
 					}
 					delete $scope.teams[team.id];
+					for (var id in $scope.stats) {
+						if ($scope.stats[id][1] == team.name) {
+							delete $scope.stats[id];
+						}
+					}
 				});
 			}
 		}
@@ -134,10 +170,10 @@ myApp.controller('dashController',
 
 		$scope.radarLabels = ["PTS", "AST", "REB", "BLK", "STL", "TOV", "FG%"];
 		$scope.radarData = [
-			[65, 59, 90, 81, 56, 55, 40],
-			[28, 48, 40, 19, 96, 27, 100]
+			[0, 0, 0, 0, 0, 0, 0],
+			// [28, 48, 40, 19, 96, 27, 100]
 		];
-		$scope.radarSeries = ["Player A", "AVERAGE"];
+		$scope.radarSeries = [];
 		$scope.radarOptions = {
 			legend: {
 				display: true,
@@ -145,7 +181,8 @@ myApp.controller('dashController',
 			},
 			scale: {
                 ticks: {
-                    beginAtZero: true
+                    beginAtZero: true,
+                    max: 100,
                 }
             },
 		};

@@ -4,6 +4,7 @@ var passport = require('passport');
 
 var Game = require('../models/game.js');
 var Player = require('../models/player.js');
+var Team = require('../models/team.js');
 
 router.get('/', function(req, res, next) {
     Game.find({user: req.user})
@@ -21,7 +22,33 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/team/:id', function(req, res, next) {
+    Team.findById(req.params.id, function(err, doc) {
+        if (err) {
+            return res.status(404).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (doc) {
+            Game.find({player: { $in: doc.players}})
+            .exec(function(err, docs) {
+                if (err) {
+                    return res.status(404).json({
+                        title: 'An error occurred',
+                        error: err
+                    });
+                }
+                res.status(200).json({
+                    message: 'Success',
+                    obj: docs,
+                });
+            });
+        }
+    });
+});
+
+router.get('/player/:id', function(req, res, next) {
     Game.find({player: req.params.id})
     .exec(function(err, docs) {
         if (err) {

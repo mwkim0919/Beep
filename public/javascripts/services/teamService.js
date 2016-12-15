@@ -7,6 +7,7 @@ myApp.factory('TeamService',
 
     return ({
       getTeams: getTeams,
+      getTeamStat: getTeamStat,
       addTeam: addTeam,
       removeTeam: removeTeam,
       editTeam: editTeam
@@ -21,6 +22,16 @@ myApp.factory('TeamService',
       // handle error
       .error(function(data) {
         // DO something
+      });
+    }
+
+    function getTeamStat(team) {
+      return $http.get('/games/team/' + team.id)
+      .success(function(data) {
+
+      })
+      .error(function(data) {
+
       });
     }
 

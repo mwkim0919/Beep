@@ -26,7 +26,7 @@ myApp.factory('GameService',
     }
 
     function getGamesByPlayer(player) {
-      return $http.get('/games/' + player.id)
+      return $http.get('/games/player/' + player.id)
       .success(function(data) {
 
       })

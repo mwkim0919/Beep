@@ -36,7 +36,7 @@
 		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left">Players <span ng-if="team">in</span> {{team.name}}</h3>
+				<h3 class="panel-title pull-left">Players</h3>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
@@ -117,7 +117,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="panel-body">
-						<canvas id="radar" class="chart chart-radar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" height="300"></canvas> 
+						<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" height="300"></canvas> 
 					</div>
 				</div>
 			</div>
@@ -132,7 +132,9 @@
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th ng-repeat="label in statLabels">{{label}}</th>
+								<th ng-repeat="label in statLabels">
+									{{label}}
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -141,7 +143,7 @@
 									{{rec}}
 								</td>
 								<td>
-									<button class="btn btn-sm btn-danger" ng-click="removePlayerStat(id)">
+									<button class="btn btn-sm btn-danger" ng-click="removeStat(id)">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
 								</td>
