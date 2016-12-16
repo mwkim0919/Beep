@@ -20,7 +20,7 @@ myApp.controller('dashController',
 			// responsive: false,
 			legend: {
 				display: true,
-				position: "top",
+				position: "right",
 			},
 			scale: {
                 ticks: {
@@ -80,7 +80,7 @@ myApp.controller('dashController',
 					getPercentile($scope.allStat[2].sort(), data[5]),
 					getPercentile($scope.allStat[3].sort(), data[6]),
 					getPercentile($scope.allStat[4].sort(), data[7]),
-					getPercentile($scope.allStat[5].sort().reverse(), data[8])
+					100-getPercentile($scope.allStat[5].sort().reverse(), data[8])
 				];
 				dataArray.push(percentiles);
 			}
@@ -239,6 +239,9 @@ myApp.controller('dashController',
 						}
 					}
 					removeRadarData($scope.radarSeries, $scope.radarData, radarIds, team.id);
+					for (var i in response.data.obj.players) {
+						removeRadarData($scope.radarSeries, $scope.radarData, radarIds, response.data.obj.players[i]._id);
+					}
 				});
 			}
 		}

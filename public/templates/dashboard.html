@@ -72,9 +72,9 @@
 									<button class="btn btn-sm btn-default" ng-click="addPlayerStat(player)">
 										<span class="glyphicon glyphicon-search"></span>
 									</button>
-									<button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
+									<!-- <button class="btn btn-sm btn-primary" ng-click="editPlayer(player)">
 										<span class="glyphicon glyphicon-pencil"></span>
-									</button>
+									</button> -->
 									<button class="btn btn-sm btn-danger" ng-click="removePlayer(player)">
 										<span class="glyphicon glyphicon-remove"></span>
 									</button>
@@ -96,22 +96,22 @@
 				<div class="col-md-6 col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title pull-left">Attribute Chart</h3>
+							<h3 class="panel-title pull-left">Radar Percentile Chart</h3>
 							<div class="clearfix"></div>
 						</div>
 						<div class="panel-body">
-							<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" chart-colors="colors" height="170"></canvas> 
+							<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" chart-colors="colors" height="200"></canvas> 
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title pull-left">Attribute Chart</h3>
+							<h3 class="panel-title pull-left">Bar Percentile Chart</h3>
 							<div class="clearfix"></div>
 						</div>
 						<div class="panel-body">
-							<canvas id="base" class="chart-horizontal-bar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="barOptions" height="170"></canvas>
+							<canvas id="base" class="chart-horizontal-bar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="barOptions" chart-colors="colors" height="200"></canvas>
 						</div>
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 				<div class="col-md-12 col-sm-12">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title pull-left">Stats</h3>
+							<h3 class="panel-title pull-left">Player/Team Stats</h3>
 							<div class="clearfix"></div>
 						</div>
 						<div class="panel-body">
@@ -153,19 +153,3 @@
 		</div>
 	</div>
 </div>
-
-<!-- <div class="modal fade" id="team-form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Add your team</h4>
-			</div>
-			<div class="modal-body">
-				<form ng-submit="addTeam()">
-					
-				</form>
-			</div>
-		</div>
-	</div>
-</div> -->

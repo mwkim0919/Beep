@@ -7,8 +7,8 @@ myApp.controller('scoreController',
 		$scope.awayStat = {};
 		$scope.statLabels = ["Name", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%"];
 		$scope.teamStatLabels = ["Field Goals", "Field Goal %", "3 Pointers", "3 Pointers %", "Assists", "Rebounds", "Turnovers", "Steals", "Blocks"];
-		$scope.homeTeam = ["10/12", "49%", "1/5", "20%", 3, 4, 2, 1, 2];
-		$scope.awayTeam = ["10/12", "49%", "1/5", "20%", 3, 4, 2, 1, 2];
+		$scope.homeTeam = [];
+		$scope.awayTeam = [];
 		
 		$scope.isEmpty = function(map) {
 			for(var key in map) {
@@ -81,21 +81,52 @@ myApp.controller('scoreController',
 			}
 		}
 
-		$scope.add = function(array1, array2, player) {
-			array1[player.id] = player;
-			array2[player.id] = [0,0,0,0,0,0,0,0,0,0,0,0];
-		};
-
-		$scope.remove = function(array, player) {
-			delete array[player.id];
+		function updateTeamStat(array, teamArray) {
+			var fgm = 0, fga = 0, tpm = 0, tpa = 0, ast = 0, reb = 0, tov = 0, stl = 0, blk = 0, pts = 0;
+			for (var id in array) {
+				fgm += array[id][6];
+				fga += array[id][7];
+				tpm += array[id][9];
+				tpa += array[id][10];
+				ast += array[id][2];
+				reb += array[id][1];
+				tov += array[id][5];
+				stl += array[id][3];
+				blk += array[id][4];
+				pts += array[id][0];
+			}
+			teamArray[0] = fgm + " / " + fga;
+			teamArray[1] = fga != 0 ? (fgm / fga * 100).toFixed(1) : 0;
+			teamArray[2] = tpm + " / " + tpa;
+			teamArray[3] = tpa != 0 ? (tpm / tpa * 100).toFixed(1) : 0;
+			teamArray[4] = ast;
+			teamArray[5] = reb;
+			teamArray[6] = tov;
+			teamArray[7] = stl;
+			teamArray[8] = blk;
+			teamArray[9] = pts;
 		}
 
-		$scope.increment = function(array, id, index) {
-			increment(array, id, index);
+		$scope.add = function(array1, array2, array3, player) {
+			array1[player.id] = player;
+			array2[player.id] = [0,0,0,0,0,0,0,0,0,0,0,0];
+			updateTeamStat(array2, array3);
 		};
 
-		$scope.decrement = function(array, id, index) {
-			decrement(array, id, index);
+		$scope.remove = function(array1, array2, array3, player) {
+			delete array1[player.id];
+			delete array2[player.id];
+			updateTeamStat(array2, array3);
+		}
+
+		$scope.increment = function(array1, array2, id, index) {
+			increment(array1, id, index);
+			updateTeamStat(array1, array2);
+		};
+
+		$scope.decrement = function(array1, array2, id, index) {
+			decrement(array1, id, index);
+			updateTeamStat(array1, array2);
 		};
 
 		$scope.checkGoalAttempt = function(array, id, index) {
@@ -115,6 +146,7 @@ myApp.controller('scoreController',
 			delete $scope.homeStat;
 			$scope.homePlayer = {};
 			$scope.homeStat = {};
+			$scope.homeTeam.splice(0, $scope.homeTeam.length);
 			for (var index in $scope.awayPlayer) {
 				GameService.addGame(index, $scope.awayStat[index])
 				.then(function(response) {
@@ -125,6 +157,7 @@ myApp.controller('scoreController',
 			delete $scope.awayStat;
 			$scope.awayPlayer = {};
 			$scope.awayStat = {};
+			$scope.awayTeam.splice(0, $scope.awayTeam.length);
 		}
 	}
 ]);

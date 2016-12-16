@@ -72,9 +72,27 @@ canvas {
     margin-bottom: 20px;
 }
 
+h1.score {
+    font-size: 120px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h3.score-title {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+
 .team-stat {
     margin-left: auto;
     margin-right: auto;
+}
+
+.team-stat p {
+    font-size: 15px;
 }
 
 .td-left {
