@@ -19,7 +19,7 @@
 					</div>
 				</form>
 				<div class="list-group" style="margin-top: 13px;">
-					<a href="" class="list-group-item clearfix" ng-repeat="(id, team) in teams" ng-click="getPlayersByTeam(team)">
+					<a href="" class="list-group-item clearfix" ng-repeat="(id, team) in teams" ng-click="getTeamInfo(team)">
 						{{team.name}}
 						<span class="pull-right">
 							<span class="badge" style="margin-right: 15px;">{{team.players.length}}</span>
@@ -87,69 +87,67 @@
 		</div>
 	</div>
 	<div class="col-md-8">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title pull-left">Attribute Chart</h3>
-						<div class="clearfix"></div>
-					</div>
-					<div class="panel-body">
-						<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" height="300"></canvas> 
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title pull-left">Attribute Chart</h3>
-						<div class="clearfix"></div>
-					</div>
-					<div class="panel-body">
-						<canvas id="base" class="chart-horizontal-bar" chart-data="data" chart-labels="labels" chart-series="series" chart-options="barOptions" height="300"></canvas>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						<h3 class="panel-title pull-left">Attribute Chart</h3>
-						<div class="clearfix"></div>
-					</div>
-					<div class="panel-body">
-						<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" height="300"></canvas> 
-					</div>
-				</div>
-			</div>
-		</div>
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title pull-left">Stats</h3>
+				<h3 class="panel-title pull-left">Statistics</h3>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th ng-repeat="label in statLabels">
-									{{label}}
-								</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="(id, stat) in stats">
-								<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index">
-									{{rec}}
-								</td>
-								<td>
-									<button class="btn btn-sm btn-danger" ng-click="removeStat(id)">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+				<div class="col-md-6 col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">Attribute Chart</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" chart-colors="colors" height="170"></canvas> 
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">Attribute Chart</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							<canvas id="base" class="chart-horizontal-bar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="barOptions" height="170"></canvas>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-12 col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">Stats</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							<div class="table-responsive">
+								<table class="table table-hover">
+									<thead>
+										<tr>
+											<th ng-repeat="label in statLabels">
+												{{label}}
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="(id, stat) in stats">
+											<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index">
+												{{rec}}
+											</td>
+											<td>
+												<button class="btn btn-sm btn-danger" ng-click="removeStat(id)">
+													<span class="glyphicon glyphicon-remove"></span>
+												</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

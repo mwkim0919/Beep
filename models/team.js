@@ -6,7 +6,7 @@ var Game = require('../models/game');
 
 var Team = new Schema({
 	user: {type: Schema.Types.ObjectId, ref: 'User'},
-	name: {type: String, required: true},
+	name: {type: String, required: true, unique: true},
 	win: {type: Number, required: false},
 	loss: {type: Number, required: false},
 	players: [{type: Schema.Types.ObjectId, ref: 'Player'}],

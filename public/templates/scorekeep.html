@@ -1,13 +1,50 @@
 <div ng-include="'/templates/navbar.html'"></div>
 
 <div class="dashboard">
-	<div class="row">
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-			<canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels" chart-series="series" height="50"></canvas>
-		</div>
-		<div class="col-md-2">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Statistics</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<div class="col-md-3 col-sm-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">Attribute Chart</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-6">
+					<div class="panel panel-default team-stat-panel">
+						<div class="panel-body team-stat">
+							<table class="team-stat">
+								<tr ng-repeat="label in teamStatLabels">
+									<td class="td-left"><h4>{{homeTeam[$index]}}</h4></td>
+									<td><h4><strong>{{label}}</strong></h4></td>
+									<td class="td-right"><h4>{{awayTeam[$index]}}</h4></td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-3 col-sm-3">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title pull-left">Stats</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="col-md-5">

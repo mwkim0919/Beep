@@ -26,27 +26,19 @@ a {
 }
 
 .signin-page {
-	/*position: absolute;*/
 	padding: 30px;
     width: 400px;
     margin-top: 6%;
     margin-left: auto;
     margin-right: auto;
-    /*top: 50%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, 20%);*/
 }
 
 .signup-page {
-	/*position: absolute;*/
 	padding: 40px;
     width: 400px;
     margin-top: 6%;
     margin-left: auto;
     margin-right: auto;
-    /*top: 50%;*/
-    /*left: 50%;*/
-    /*transform: translate(-50%, 20%);*/
 }
 
 .home-header {
@@ -76,8 +68,21 @@ th, tr, td {
 }
 
 canvas {
-    background-color: white;
     margin-top: 20px;
     margin-bottom: 20px;
-    padding: 20px;
+}
+
+.team-stat {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.td-left {
+    padding-right: 30px;
+    text-align: right;
+}
+
+.td-right {
+    padding-left: 30px;
+    text-align: left;
 }
