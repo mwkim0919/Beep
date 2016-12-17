@@ -1,0 +1,40 @@
+<div ng-include="'/templates/navbar.html'"></div>
+
+<div class="dashboard">
+	<div class="row">
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="table table-responsive">
+						<table class="table">
+							<thead>
+								<tr>
+									<th ng-repeat="label in tableLabels">{{label}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="(id, player) in players">
+									<td>{{player.name}}</td>
+									<td>{{teams[player.team].name}}</td>
+									<td>{{games[id]}}</td>
+									<!-- <td ng-repeat="(sid, stat) in averages[id] track by $index">
+										{{stat}}
+									</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

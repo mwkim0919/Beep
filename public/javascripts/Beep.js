@@ -32,11 +32,11 @@ myApp.config(function ($routeProvider) {
     access: {restricted: true}
   })
 
-  // .when('/schedules', {
-  //   templateUrl: 'templates/schedule.html',
-  //   controller: 'scheduleController',
-  //   access: {restricted: true}
-  // })
+  .when('/players', {
+    templateUrl: 'templates/players.html',
+    controller: 'playersController',
+    access: {restricted: true}
+  })
   
   .otherwise({
     redirectTo: '/'
