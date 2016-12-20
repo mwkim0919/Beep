@@ -242,12 +242,15 @@ myApp.controller('dashController',
 		};
 
 		$scope.removeTeam = function(team) {
+			// CLEAR OUT PLAYER LIST WHEN PLAYERS IN THE TEAM IS DELETED.
 			var r = confirm("Are you sure that you want to delete this team?\nAll information in this team will be deleted.");
 			if (r == true) {
 				TeamService.removeTeam(team.id)
 				.then(function(response) {
 					if ($scope.team == team) {
 						$scope.team = null;
+						delete $scope.players;
+						$scope.players = {};
 					}
 					delete $scope.teams[team.id];
 					for (var id in $scope.stats) {
