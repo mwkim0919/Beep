@@ -8,10 +8,9 @@ myApp.controller('dashController',
 		$scope.stats = {};
 		$scope.allStat = [[],[],[],[],[],[]];
 
-		$scope.radarLabels = ["PTS", "AST", "REB", "BLK", "STL", "TOV"];
+		$scope.radarLabels = ["PTS", "REB", "AST", "STL", "BLK", "TOV"];
 		$scope.radarData = [
 			[0, 0, 0, 0, 0, 0],
-			// [28, 48, 40, 19, 96, 27, 100]
 		];
 		$scope.radarSeries = [];
 		var radarIds = [];
@@ -70,7 +69,7 @@ myApp.controller('dashController',
 				dataArray[0][2] = getPercentile($scope.allStat[2].sort(), data[5]);
 				dataArray[0][3] = getPercentile($scope.allStat[3].sort(), data[6]);
 				dataArray[0][4] = getPercentile($scope.allStat[4].sort(), data[7]);
-				dataArray[0][5] = getPercentile($scope.allStat[5].sort().reverse(), data[8]);
+				dataArray[0][5] = 100-getPercentile($scope.allStat[5].sort().reverse(), data[8]);
 			} else if (idArray.indexOf(id) == -1 && idArray.length > 0) {
 				idArray.push(id);
 				seriesArray.push(name);
@@ -83,6 +82,19 @@ myApp.controller('dashController',
 					100-getPercentile($scope.allStat[5].sort().reverse(), data[8])
 				];
 				dataArray.push(percentiles);
+			}
+		}
+
+		function clearRadarData(dataArray, allStatArray) {
+			var length = dataArray.length;
+			for (var i = 1; i < length; i++) {
+				dataArray.pop();
+			}
+			for (var j = 0; j < dataArray.length; j++) {
+				dataArray[0][j] = 0;
+			}
+			for (var k = 0; k < allStatArray.length; k++) {
+				allStatArray[k].length = 0;
 			}
 		}
 
@@ -137,6 +149,11 @@ myApp.controller('dashController',
 			getPlayersByTeam(team);
 			TeamService.getTeamStat(team)
 			.then(function(response) {
+				delete $scope.stats;
+				$scope.stats = {};
+				$scope.radarSeries.length = 0;
+				radarIds.length = 0;
+				clearRadarData($scope.radarData, $scope.allStat);
 				var gp=0, pts=0, reb=0, ast=0, stl=0, blk=0, tov=0, fgm=0, fga=0, fgp=0, tpm=0, tpa=0, tpp=0;
 				for (var i = 0; i < response.data.obj.length; i++) {
 					gp += 1;

@@ -24,8 +24,8 @@
 							<tbody>
 								<tr ng-repeat="(id, player) in players">
 									<td>{{player.name}}</td>
-									<td>{{teams[player.team].name}}</td>
-									<td>{{games[id]}}</td>
+									<td>{{player.team}}</td>
+									<td>{{player.games}}</td>
 									<!-- <td ng-repeat="(sid, stat) in averages[id] track by $index">
 										{{stat}}
 									</td> -->

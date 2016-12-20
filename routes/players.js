@@ -7,7 +7,7 @@ var Player = require('../models/player.js');
 var Team = require('../models/team.js');
 
 router.get('/', function(req, res, next) {
-    Player.find({user: req.user})
+    Player.find({user: req.user}).populate('Games')
     .exec(function(err, docs) {
         if (err) {
             return res.status(404).json({
