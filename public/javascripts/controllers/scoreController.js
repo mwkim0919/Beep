@@ -5,7 +5,7 @@ myApp.controller('scoreController',
 		$scope.homeStat = {};
 		$scope.awayPlayer = {};
 		$scope.awayStat = {};
-		$scope.statLabels = ["PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "3PM", "3PA", "FGP", "3P%"];
+		$scope.statLabels = ["PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "3PM", "3PA", "FG%", "3P%"];
 		$scope.teamStatLabels = ["Field Goals", "Field Goal %", "3 Pointers", "3 Pointers %", "Assists", "Rebounds", "Turnovers", "Steals", "Blocks"];
 		$scope.homeTeam = [];
 		$scope.awayTeam = [];
@@ -158,6 +158,15 @@ myApp.controller('scoreController',
 			$scope.awayPlayer = {};
 			$scope.awayStat = {};
 			$scope.awayTeam.splice(0, $scope.awayTeam.length);
-		}
+		};
+		
+		// var $table = $('.table');
+		// var $fixedColumn = $table.clone().insertBefore($table).addClass('fixed-column');
+
+		// $fixedColumn.find('th:not(:first-child),td:not(:first-child)').remove();
+
+		// $fixedColumn.find('tr').each(function (i, elem) {
+		// 	$(this).height($table.find('tr:eq(' + i + ')').height());
+		// });
 	}
 ]);

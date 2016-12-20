@@ -92,7 +92,7 @@ h3.score-title {
 }
 
 .team-stat p {
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .td-left {
@@ -105,9 +105,16 @@ h3.score-title {
     text-align: left;
 }
 
-.table-responsive>.fixed-column {
+/*.table-responsive>.fixed-column {
     position: fixed;
     display: inline-block;
     width: auto;
     border-right: 1px solid #ddd;
-}
+}*/
+/*.vr {
+    display:inline;
+    height:100%;
+    width:1px;
+    border:1px inset;
+    margin:5px
+}*/

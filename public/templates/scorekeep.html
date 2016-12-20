@@ -1,53 +1,7 @@
 <div ng-include="'/templates/navbar.html'"></div>
 
 <div class="dashboard">
-	<div class="col-md-12">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<div class="col-md-3 col-sm-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h3 class="panel-title score-title">
-								<span class="glyphicon glyphicon-home"></span> Home
-							</h3>
-							<div class="clearfix"></div>
-						</div>
-						<div class="panel-body">
-							<h1 class="score">{{homeTeam[9]}}</h1>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div class="panel panel-default team-stat-panel">
-						<div class="panel-body team-stat">
-							<table class="team-stat">
-								<tr ng-repeat="label in teamStatLabels">
-									<td class="td-left"><p>{{homeTeam[$index]}}</p></td>
-									<td><p><strong>{{label}}</strong></p></td>
-									<td class="td-right"><p>{{awayTeam[$index]}}</p></td>
-								</tr>
-							</table>
-							<button type="button" class="btn btn-danger btn-lg btn-block" ng-disabled="isEmpty(homePlayer) && isEmpty(awayPlayer)" ng-click="submit()">Submit</button>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-3 col-sm-3">
-					<div class="panel panel-danger">
-						<div class="panel-heading">
-							<h3 class="panel-title score-title">
-								<span class="glyphicon glyphicon-new-window"></span> Away
-							</h3>
-							<div class="clearfix"></div>
-						</div>
-						<div class="panel-body">
-							<h1 class="score">{{awayTeam[9]}}</h1>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-2" ng-controller="dashController">
+	<div class="col-md-3" ng-controller="dashController">
 		<div ng-init="getTeams()" class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Teams</h3>
@@ -64,7 +18,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">Players 
@@ -78,7 +31,6 @@
 						<tr>
 							<th style="text-align: center;">Name</th>
 							<th style="text-align: center;"></th>
-							<th style="text-align: center;"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -88,8 +40,7 @@
 								<button class="btn btn-sm btn-primary" ng-click="add(homePlayer, homeStat, homeTeam, player)">
 									<span class="glyphicon glyphicon-home"></span>
 								</button>
-							</td>
-							<td>
+								<!-- <div class="vr"></div> -->
 								<button class="btn btn-sm btn-danger" ng-click="add(awayPlayer, awayStat, awayTeam, player)">
 									<span class="glyphicon glyphicon-new-window"></span>
 								</button>
@@ -100,7 +51,51 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-10">
+	<div class="col-md-9">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="col-md-4 col-sm-4">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h3 class="panel-title score-title">
+								<span class="glyphicon glyphicon-home"></span> Home
+							</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							<h1 class="score">{{homeTeam[9]}}</h1>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="panel panel-default team-stat-panel">
+						<div class="panel-body team-stat">
+							<table class="team-stat">
+								<tr ng-repeat="label in teamStatLabels">
+									<td class="td-left"><p>{{homeTeam[$index]}}</p></td>
+									<td><p><strong>{{label}}</strong></p></td>
+									<td class="td-right"><p>{{awayTeam[$index]}}</p></td>
+								</tr>
+							</table>
+							<button type="button" class="btn btn-danger btn-lg btn-block" ng-disabled="isEmpty(homePlayer) && isEmpty(awayPlayer)" ng-click="submit()">Submit</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-4">
+					<div class="panel panel-danger">
+						<div class="panel-heading">
+							<h3 class="panel-title score-title">
+								<span class="glyphicon glyphicon-new-window"></span> Away
+							</h3>
+							<div class="clearfix"></div>
+						</div>
+						<div class="panel-body">
+							<h1 class="score">{{awayTeam[9]}}</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="panel panel-primary">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">
