@@ -104,3 +104,10 @@ h3.score-title {
     padding-left: 30px;
     text-align: left;
 }
+
+.table-responsive>.fixed-column {
+    position: fixed;
+    display: inline-block;
+    width: auto;
+    border-right: 1px solid #ddd;
+}

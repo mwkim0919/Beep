@@ -49,8 +49,8 @@ myApp.factory('GameService',
           tov: array[5],
           fgm: array[6],
           fga: array[7],
-          tpm: array[9],
-          tpa: array[10],
+          tpm: array[8],
+          tpa: array[9],
           min: null,
         }
       )

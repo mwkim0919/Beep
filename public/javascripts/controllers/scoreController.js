@@ -5,7 +5,7 @@ myApp.controller('scoreController',
 		$scope.homeStat = {};
 		$scope.awayPlayer = {};
 		$scope.awayStat = {};
-		$scope.statLabels = ["Name", "PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "FG%", "3PM", "3PA", "3P%"];
+		$scope.statLabels = ["PTS", "REB", "AST", "STL", "BLK", "TOV", "FGM", "FGA", "3PM", "3PA", "FGP", "3P%"];
 		$scope.teamStatLabels = ["Field Goals", "Field Goal %", "3 Pointers", "3 Pointers %", "Assists", "Rebounds", "Turnovers", "Steals", "Blocks"];
 		$scope.homeTeam = [];
 		$scope.awayTeam = [];
@@ -22,29 +22,29 @@ myApp.controller('scoreController',
 		function increment(array, id, index) {
 			var fgm = array[id][6];
 			var fga = array[id][7];
-			var tpm = array[id][9];
-			var tpa = array[id][10];
+			var tpm = array[id][8];
+			var tpa = array[id][9];
 			if (index == 6) {
 				fgm = ++array[id][index];
 				fga = ++array[id][index+1];
-				array[id][8] = (fgm / fga).toFixed(3);
+				array[id][10] = (fgm / fga).toFixed(3);
 				array[id][0] += 2;
 			} else if (index == 7) {
 				fga = ++array[id][index];
-				array[id][8] = (fgm / fga).toFixed(3);
-			} else if (index == 9) {
+				array[id][10] = (fgm / fga).toFixed(3);
+			} else if (index == 8) {
 				tpm = ++array[id][index];
 				tpa = ++array[id][index+1];
 				fgm = ++array[id][6];
 				fga = ++array[id][7];
 				array[id][11] = (tpm / tpa).toFixed(3);
-				array[id][8] = (fgm / fga).toFixed(3);
+				array[id][10] = (fgm / fga).toFixed(3);
 				array[id][0] += 3;
-			} else if (index == 10) {
+			} else if (index == 9) {
 				tpa = ++array[id][index];
 				fga = ++array[id][7];
 				array[id][11] = (tpm / tpa).toFixed(3);
-				array[id][8] = (fgm / fga).toFixed(3);
+				array[id][10] = (fgm / fga).toFixed(3);
 			} else {
 				array[id][index]++;
 			}
@@ -53,29 +53,29 @@ myApp.controller('scoreController',
 		function decrement(array, id, index) {
 			var fgm = array[id][6];
 			var fga = array[id][7];
-			var tpm = array[id][9];
-			var tpa = array[id][10];
+			var tpm = array[id][8];
+			var tpa = array[id][9];
 			if (index == 6) {
 				fgm = --array[id][index];
 				fga = --array[id][index+1];
-				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
+				array[id][10] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 				array[id][0] -= 2;
 			} else if (index == 7) {
 				fga = --array[id][index];
-				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
-			} else if (index == 9) {
+				array[id][10] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
+			} else if (index == 8) {
 				tpm = --array[id][index];
 				tpa = --array[id][index+1];
 				fgm = --array[id][6];
 				fga = --array[id][7];
 				array[id][11] = isNaN((tpm / tpa).toFixed(3)) ? 0 : (tpm / tpa).toFixed(3);
-				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
+				array[id][10] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 				array[id][0] -= 3;
-			} else if (index == 10) {
+			} else if (index == 9) {
 				tpa = --array[id][index];
 				fga = --array[id][7];
 				array[id][11] = isNaN((tpm / tpa).toFixed(3)) ? 0 : (tpm / tpa).toFixed(3);
-				array[id][8] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
+				array[id][10] = isNaN((fgm / fga).toFixed(3)) ? 0 : (fgm / fga).toFixed(3);
 			} else {
 				array[id][index]--;
 			}
@@ -86,8 +86,8 @@ myApp.controller('scoreController',
 			for (var id in array) {
 				fgm += array[id][6];
 				fga += array[id][7];
-				tpm += array[id][9];
-				tpa += array[id][10];
+				tpm += array[id][8];
+				tpa += array[id][9];
 				ast += array[id][2];
 				reb += array[id][1];
 				tov += array[id][5];
@@ -131,7 +131,7 @@ myApp.controller('scoreController',
 
 		$scope.checkGoalAttempt = function(array, id, index) {
 			var fg = array[id][6] == array[id][7] && index == 7;
-			var tg = array[id][9] == array[id][10] && index == 10;
+			var tg = array[id][8] == array[id][9] && index == 9;
 			return fg || tg;
 		};
 
