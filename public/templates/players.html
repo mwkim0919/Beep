@@ -1,37 +1,62 @@
 <div ng-include="'/templates/navbar.html'"></div>
 
 <div class="dashboard">
-	<div class="row">
-		<div class="container">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					
+	<div class="col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title pull-left">Teams</h3>
+				<div class="clearfix"></div>
+			</div>
+			<div class="panel-body">
+				<div class="list-group" style="margin-top: 13px;">
+					<a href="" class="list-group-item clearfix" ng-repeat="(id, team) in teams" ng-click="getPlayersByTeam(team)">
+						{{team.name}}
+						<span class="pull-right">
+							<span class="badge" style="margin-right: 15px;">{{team.players.length}}</span>
+						</span>
+					</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="container">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<div class="table table-responsive">
-						<table class="table">
-							<thead>
-								<tr>
-									<th ng-repeat="label in tableLabels">{{label}}</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr ng-repeat="(id, player) in players">
-									<td>{{player.name}}</td>
-									<td>{{player.team}}</td>
-									<td>{{player.games}}</td>
-									<!-- <td ng-repeat="(sid, stat) in averages[id] track by $index">
-										{{stat}}
-									</td> -->
-								</tr>
-							</tbody>
-						</table>
+	<div class="col-md-10">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="table table-responsive">
+					<table class="table">
+						<thead>
+							<tr>
+								<th ng-repeat="label in tableLabels">
+									<a href="" ng-click="changeSort(label)">{{label | uppercase}}</a>
+									<span ng-show="checkSort(label) && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+									<span ng-show="checkSort(label) && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+								</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr dir-paginate="player in averages | orderBy:sortType:sortReverse | itemsPerPage:10">
+								<td style="vertical-align: middle;">{{player.name}}</td>
+								<td style="vertical-align: middle;">{{player.team}}</td>
+								<td style="vertical-align: middle;">{{player.gp}}</td>
+								<td style="vertical-align: middle;">{{player.ppg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.rpg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.apg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.blkpg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.spg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.topg | number : 1}}</td>
+								<td style="vertical-align: middle;">{{player.fgp | number : 3}}</td>
+								<td style="vertical-align: middle;">{{player.tpp | number : 3}}</td>
+								<td>
+									<button class="btn btn-default" ng-click="">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="pagination pull-right">
+						<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
 					</div>
 				</div>
 			</div>

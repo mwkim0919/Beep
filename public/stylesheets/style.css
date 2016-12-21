@@ -105,6 +105,15 @@ h3.score-title {
     text-align: left;
 }
 
+.pagination {
+    margin: 0;
+}
+
+/*.playerTable {
+    height: 285px;
+    overflow-y: scroll;
+}*/
+
 /*.table-responsive>.fixed-column {
     position: fixed;
     display: inline-block;

@@ -7,7 +7,7 @@ var Player = require('../models/player.js');
 var Team = require('../models/team.js');
 
 router.get('/', function(req, res, next) {
-    Player.find({user: req.user}).populate('Games')
+    Player.find({user: req.user}).populate('games').populate('team')
     .exec(function(err, docs) {
         if (err) {
             return res.status(404).json({
@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-    Player.find({team: req.params.id})
+    Player.find({team: req.params.id}).sort({name: 1}).populate('games').populate('team')
     .exec(function(err, docs) {
         if (err) {
             return res.status(404).json({

@@ -1,4 +1,4 @@
-var myApp = angular.module('Beep', ['ngRoute', 'chart.js']);
+var myApp = angular.module('Beep', ['ngRoute', 'chart.js', 'angularUtils.directives.dirPagination']);
 
 myApp.config(function ($routeProvider) {
 
