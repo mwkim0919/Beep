@@ -96,46 +96,87 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-primary">
+		<div class="panel panel-default">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">
-					<span class="glyphicon glyphicon-home"></span> Home
+					<span class="glyphicon glyphicon-blackboard"></span> Boxscore
 				</h3>
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<th>Name</th>
-							<th ng-repeat="label in statLabels" style="text-align: center;">
-								{{label}}
-							</th>
-						</thead>
-						<tbody>
-							<tr ng-repeat="(id, player) in homePlayer" class="scorePlayer">
-								<td>
-									<div>{{player.name}}</div>
-									<button class="btn btn-xs btn-danger" ng-click="remove(homePlayer, homeStat, homeTeam, player)">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button>
-								</td>
-								<td ng-repeat="rec in homeStat[id] track by $index" style="vertical-align: middle;">
-									<button ng-hide="$index == 10 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(homeStat, homeTeam, id, $index)">
-										<span class="glyphicon glyphicon-arrow-up"></span>
-									</button>
-									<div>{{rec}}</div>
-									<button ng-hide="$index == 10 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(homeStat, homeTeam, id, $index)" ng-disabled="homeStat[id][$index] == 0 || checkGoalAttempt(homeStat, id, $index)">
-										<span class="glyphicon glyphicon-arrow-down"></span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<uib-tabset active="activeJustified" justified="true">
+					<uib-tab index="0">
+						<uib-tab-heading>
+							<i class="glyphicon glyphicon-home"></i> Home
+						</uib-tab-heading>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<th>Name</th>
+									<th ng-repeat="label in statLabels" style="text-align: center;">
+										{{label}}
+									</th>
+								</thead>
+								<tbody>
+									<tr ng-repeat="(id, player) in homePlayer" class="scorePlayer">
+										<td>
+											<div>{{player.name}}</div>
+											<button class="btn btn-xs btn-danger" ng-click="remove(homePlayer, homeStat, homeTeam, player)">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+										</td>
+										<td ng-repeat="rec in homeStat[id] track by $index" style="vertical-align: middle;">
+											<button ng-hide="$index == 10 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(homeStat, homeTeam, id, $index)">
+												<span class="glyphicon glyphicon-arrow-up"></span>
+											</button>
+											<div>{{rec}}</div>
+											<button ng-hide="$index == 10 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(homeStat, homeTeam, id, $index)" ng-disabled="homeStat[id][$index] == 0 || checkGoalAttempt(homeStat, id, $index)">
+												<span class="glyphicon glyphicon-arrow-down"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</uib-tab>
+					<uib-tab index="1">
+						<uib-tab-heading>
+							<i class="glyphicon glyphicon-new-window"></i> Away
+						</uib-tab-heading>
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<th>Name</th>
+									<th ng-repeat="label in statLabels" style="text-align: center;">
+										{{label}}
+									</th>
+								</thead>
+								<tbody>
+									<tr ng-repeat="(id, player) in awayPlayer" class="scorePlayer">
+										<td>
+											<div>{{player.name}}</div>
+											<button class="btn btn-xs btn-danger" ng-click="remove(awayPlayer, awayStat, awayTeam, player)">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+										</td>
+										<td ng-repeat="rec in awayStat[id] track by $index" style="vertical-align: middle;">
+											<button ng-hide="$index == 10 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(awayStat, awayTeam, id, $index)">
+												<span class="glyphicon glyphicon-arrow-up"></span>
+											</button>
+											<div>{{rec}}</div>
+											<button ng-hide="$index == 10 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(awayStat, awayTeam, id, $index)" ng-disabled="awayStat[id][$index] == 0 || checkGoalAttempt(awayStat, id, $index)">
+												<span class="glyphicon glyphicon-arrow-down"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</uib-tab>
+				</uib-tabset>
 			</div>
 		</div>
-		<div class="panel panel-danger">
+		<!-- <div class="panel panel-danger">
 			<div class="panel-heading">
 				<h3 class="panel-title pull-left">
 					<span class="glyphicon glyphicon-new-window"></span> Away
@@ -143,36 +184,8 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="panel-body">
-				<div class="table-responsive">
-					<table class="table">
-						<thead>
-							<th>Name</th>
-							<th ng-repeat="label in statLabels" style="text-align: center;">
-								{{label}}
-							</th>
-						</thead>
-						<tbody>
-							<tr ng-repeat="(id, player) in awayPlayer" class="scorePlayer">
-								<td>
-									<div>{{player.name}}</div>
-									<button class="btn btn-xs btn-danger" ng-click="remove(awayPlayer, awayStat, awayTeam, player)">
-										<span class="glyphicon glyphicon-remove"></span>
-									</button>
-								</td>
-								<td ng-repeat="rec in awayStat[id] track by $index" style="vertical-align: middle;">
-									<button ng-hide="$index == 10 || $index == 11" class="btn btn-xs btn-primary" ng-click="increment(awayStat, awayTeam, id, $index)">
-										<span class="glyphicon glyphicon-arrow-up"></span>
-									</button>
-									<div>{{rec}}</div>
-									<button ng-hide="$index == 10 || $index == 11" ng-if="$index != 8 || $index != 11" class="btn btn-xs btn-danger" ng-click="decrement(awayStat, awayTeam, id, $index)" ng-disabled="awayStat[id][$index] == 0 || checkGoalAttempt(awayStat, id, $index)">
-										<span class="glyphicon glyphicon-arrow-down"></span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>
