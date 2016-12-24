@@ -22,41 +22,117 @@
 	<div class="col-md-10">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="table table-responsive">
-					<table class="table">
-						<thead>
-							<tr>
-								<th ng-repeat="label in tableLabels">
-									<a href="" ng-click="changeSort(label)">{{label | uppercase}}</a>
-									<span ng-show="checkSort(label) && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
-									<span ng-show="checkSort(label) && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
-								</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr dir-paginate="player in averages | orderBy:sortType:sortReverse | itemsPerPage:10">
-								<td style="vertical-align: middle;">{{player.name}}</td>
-								<td style="vertical-align: middle;">{{player.team}}</td>
-								<td style="vertical-align: middle;">{{player.gp}}</td>
-								<td style="vertical-align: middle;">{{player.ppg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.rpg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.apg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.blkpg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.spg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.topg | number : 1}}</td>
-								<td style="vertical-align: middle;">{{player.fgp | number : 3}}</td>
-								<td style="vertical-align: middle;">{{player.tpp | number : 3}}</td>
-								<td>
-									<button class="btn btn-default" ng-click="">
-										<span class="glyphicon glyphicon-search"></span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="pagination pull-right">
-						<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+				<div class="panel panel-default" ng-show="playerName">
+					<div class="panel-heading">
+						<h3 class="panel-title">{{playerName}}</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						<uib-tabset active="active">
+							<uib-tab index="0" heading="Games">
+								<div class="table-responsive">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th ng-repeat="label in gameLabels">
+													<a href="" ng-click="sortGames(label)">{{label | uppercase}}</a>
+													<span ng-show="checkSortGames(label) && !sortGameReverse" class="glyphicon glyphicon-chevron-down"></span>
+													<span ng-show="checkSortGames(label) && sortGameReverse" class="glyphicon glyphicon-chevron-up"></span>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr dir-paginate="game in playerDetail | orderBy:sortGame:sortGameReverse | itemsPerPage:7" pagination-id="gamesTable">
+												<td style="vertical-align: middle;">{{game.date | date:'medium'}}</td>
+												<td style="vertical-align: middle;">{{game.pts | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.reb | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.ast | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.stl | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.blk | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.tov | number: 1}}</td>
+												<td style="vertical-align: middle;">{{game.fgm | number: 0}}</td>
+												<td style="vertical-align: middle;">{{game.fga | number: 0}}</td>
+												<td ng-if="game.fga!=0" style="vertical-align: middle;">{{game.fgm/game.fga | number: 3}}</td>
+												<td ng-if="game.fga==0" style="vertical-align: middle;">{{0 | number: 3}}</td>
+												<td style="vertical-align: middle;">{{game.tpm | number: 0}}</td>
+												<td style="vertical-align: middle;">{{game.tpa | number: 0}}</td>
+												<td ng-if="game.tpa!=0" style="vertical-align: middle;">{{game.tpm/game.tpa | number: 3}}</td>
+												<td ng-if="game.tpa==0" style="vertical-align: middle;">{{0 | number: 3}}</td>
+											</tr>
+										</tbody>
+									</table>
+									<div class="pagination pull-right">
+										<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" pagination-id="gamesTable"></dir-pagination-controls>
+									</div>
+								</div>
+							</uib-tab>
+							<uib-tab index="1" heading="Pts">
+								<canvas id="base" class="chart-bar" chart-data="ptsData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="ptsDatasetOverride" chart-options="options" height="100">
+								</canvas> 
+							</uib-tab>
+							<uib-tab index="2" heading="Reb / Ast">
+								<canvas id="base" class="chart-bar" chart-data="rebastData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="rebastDatasetOverride" chart-options="options" height="100">
+								</canvas>
+							</uib-tab>
+							<uib-tab index="3" heading="Stl / Blk">
+								<canvas id="base" class="chart-bar" chart-data="stlblkData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="stlblkDatasetOverride" chart-options="options" height="100">
+								</canvas>
+							</uib-tab>
+							<uib-tab index="4" heading="FG% / 3P%">
+								<canvas id="base" class="chart-bar" chart-data="fgData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="fgDatasetOverride" chart-options="options" height="100">
+								</canvas>
+							</uib-tab>
+						</uib-tabset>
+						
+					</div>
+				</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Players</h3>
+						<div class="clearfix"></div>
+					</div>
+					<div class="panel-body">
+						<div class="table table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th ng-repeat="label in tableLabels">
+											<a href="" ng-click="sortPlayers(label)">{{label | uppercase}}</a>
+											<span ng-show="checkSortPlayers(label) && !sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+											<span ng-show="checkSortPlayers(label) && sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+										</th>
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr dir-paginate="player in averages | orderBy:sortType:sortReverse | itemsPerPage:7" pagination-id="playersTable">
+										<td style="vertical-align: middle;">{{player.name}}</td>
+										<td style="vertical-align: middle;">{{player.team}}</td>
+										<td style="vertical-align: middle;">{{player.gp}}</td>
+										<td style="vertical-align: middle;">{{player.ppg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.rpg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.apg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.blkpg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.spg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.topg | number : 1}}</td>
+										<td style="vertical-align: middle;">{{player.fgp | number : 3}}</td>
+										<td style="vertical-align: middle;">{{player.tpp | number : 3}}</td>
+										<td>
+											<button class="btn btn-default" ng-click="getPlayerDetail(player)">
+												<span class="glyphicon glyphicon-search"></span>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="pagination pull-right">
+								<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" pagination-id="playersTable"></dir-pagination-controls>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
