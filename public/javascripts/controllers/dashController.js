@@ -35,7 +35,7 @@ myApp.controller('dashController',
 				display: true,
 				position: "top",
 			},
-			scale: {
+			scales: {
 				xAxes: [{
 	                ticks: {
 	                	beginAtZero: true,

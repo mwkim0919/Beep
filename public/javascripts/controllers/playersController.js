@@ -24,7 +24,7 @@ myApp.controller('playersController',
 		$scope.options = {
 			legend: {
 				display: true,
-				position: "right",
+				position: "top",
 			},
 			scales: {
 	            yAxes: [{
@@ -127,8 +127,7 @@ myApp.controller('playersController',
 				var fgp = gameArray[i].fga != 0 ? gameArray[i].fgm / gameArray[i].fga : 0;
 				var tpp = gameArray[i].tpa != 0 ? gameArray[i].tpm / gameArray[i].tpa : 0;
 				var date = new Date(gameArray[i].date);
-				var dateString = date.toString().substring(4, 21);
-				console.log(dateString);
+				var dateString = date.toString().substring(4, 15);
 				dataArray1[0].push(gameArray[i].pts);
 				dataArray1[1].push(average.ppg);
 				dataArray2[0].push(gameArray[i].reb);

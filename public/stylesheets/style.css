@@ -109,21 +109,106 @@ h3.score-title {
     margin: 0;
 }
 
-/*.playerTable {
-    height: 285px;
-    overflow-y: scroll;
-}*/
+.list-item.ng-enter,
+.list-item.ng-leave,
+.list-item.ng-move {
+    transition: 0.7s linear all;
+}
 
-/*.table-responsive>.fixed-column {
-    position: fixed;
-    display: inline-block;
-    width: auto;
-    border-right: 1px solid #ddd;
-}*/
-/*.vr {
-    display:inline;
-    height:100%;
-    width:1px;
-    border:1px inset;
-    margin:5px
-}*/
+.list-item.ng-enter,
+.list-item.ng-move {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.list-item.ng-enter.ng-enter-active,
+.list-item.ng-move.ng-move-active {
+    /*height: 120px;*/
+    opacity: 1;
+}
+
+.list-item.ng-leave {
+    opacity: 1;
+    overflow: hidden;
+}
+
+.list-item.ng-leave.ng-leave-active {
+    height: 0;
+    opacity: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
+.view-container {
+    position: relative;
+}
+
+.view-frame.ng-enter,
+.view-frame.ng-leave {
+    /*background: white;*/
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.view-frame.ng-enter {
+    animation: 1s fade-in;
+    z-index: 100;
+}
+
+.view-frame.ng-leave {
+    animation: 1s fade-out;
+    z-index: 99;
+}
+
+@keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    html, body {
+        max-width: 480px;
+    }
+
+    .signin-page {
+        padding: 5px;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 70px;
+        border: 0px;
+    }
+
+    .signup-page {
+        padding: 5px;
+        width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 70px;
+        border: 0px;
+    }
+
+    .playerTable {
+        height: 224px;
+        overflow-y: scroll;
+    }
+}

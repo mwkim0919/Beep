@@ -65,7 +65,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="(id, player) in players">
+							<tr ng-repeat="(id, player) in players" class="list-item">
 								<td style="vertical-align: middle;">{{team.name}}</td>
 								<td style="vertical-align: middle;">{{player.name}}</td>
 								<td>
@@ -86,7 +86,42 @@
 	<div class="col-md-8">
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="col-md-6 col-sm-6">
+				<uib-tabset active="activeJustified" justified="true" type="pills" class="visible-xs">
+					<uib-tab index="0" heading="Player/Team Stats">
+						<div class="table-responsive playerTable">
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<th>
+										</th>
+										<th ng-repeat="label in statLabels">
+											{{label}}
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="(id, stat) in stats">
+										<td>
+											<button class="btn btn-xs btn-danger" ng-click="removeStat(id)">
+												<span class="glyphicon glyphicon-remove"></span>
+											</button>
+										</td>
+										<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index" class="list-item">
+											{{rec}}
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</uib-tab>
+					<uib-tab index="1" heading="Radar Percentile">
+						<canvas id="radar" class="chart chart-radar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="radarOptions" chart-colors="colors" height="200"></canvas>
+					</uib-tab>
+					<uib-tab index="2" heading="Bar Percentile">
+						<canvas id="base" class="chart-horizontal-bar" chart-data="radarData" chart-labels="radarLabels" chart-series="radarSeries" chart-options="barOptions" chart-colors="colors" height="200"></canvas>
+					</uib-tab>
+				</uib-tabset>
+				<div class="col-lg-6 col-md-6 col-sm-6 visible-lg visible-md visible-sm">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title pull-left">Radar Percentile Chart</h3>
@@ -97,7 +132,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-6">
+				<div class="col-lg-6 col-md-6 col-sm-6 visible-lg visible-md visible-sm">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title pull-left">Bar Percentile Chart</h3>
@@ -109,7 +144,7 @@
 					</div>
 				</div>
 				
-				<div class="col-md-12 col-sm-12">
+				<div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md visible-sm">
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<h3 class="panel-title pull-left">Player/Team Stats</h3>
@@ -127,7 +162,7 @@
 									</thead>
 									<tbody>
 										<tr ng-repeat="(id, stat) in stats">
-											<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index">
+											<td style="vertical-align: middle;" ng-repeat="rec in stat track by $index" class="list-item">
 												{{rec}}
 											</td>
 											<td>

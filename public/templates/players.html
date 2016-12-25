@@ -28,7 +28,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="panel-body">
-						<uib-tabset active="activeJustified" justified="true">
+						<uib-tabset active="activeJustified" justified="true" type="pills">
 							<uib-tab index="0" heading="Games">
 								<div class="table-responsive">
 									<table class="table table-hover">
@@ -42,7 +42,7 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr dir-paginate="game in playerDetail | orderBy:sortGame:sortGameReverse | itemsPerPage:7" pagination-id="gamesTable">
+											<tr dir-paginate="game in playerDetail | orderBy:sortGame:sortGameReverse | itemsPerPage:7" pagination-id="gamesTable" class="list-item">
 												<td style="vertical-align: middle;">{{game.date | date:'medium'}}</td>
 												<td style="vertical-align: middle;">{{game.pts | number: 1}}</td>
 												<td style="vertical-align: middle;">{{game.reb | number: 1}}</td>
@@ -67,23 +67,35 @@
 								</div>
 							</uib-tab>
 							<uib-tab index="1" heading="Pts">
-								<canvas id="base" class="chart-bar" chart-data="ptsData" chart-labels="chartLabels" chart-colors="colors" 
+								<canvas id="base" class="chart-bar visible-md visible-sm" chart-data="ptsData" chart-labels="chartLabels" chart-colors="colors" 
 								chart-dataset-override="ptsDatasetOverride" chart-options="options" height="100">
+								</canvas>
+								<canvas id="base" class="chart-bar visible-xs" chart-data="ptsData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="ptsDatasetOverride" chart-options="options" height="300">
 								</canvas> 
 							</uib-tab>
 							<uib-tab index="2" heading="Reb / Ast">
-								<canvas id="base" class="chart-bar" chart-data="rebastData" chart-labels="chartLabels" chart-colors="colors" 
+								<canvas id="base" class="chart-bar visible-md visible-sm" chart-data="rebastData" chart-labels="chartLabels" chart-colors="colors" 
 								chart-dataset-override="rebastDatasetOverride" chart-options="options" height="100">
+								</canvas>
+								<canvas id="base" class="chart-bar visible-xs" chart-data="rebastData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="rebastDatasetOverride" chart-options="options" height="300">
 								</canvas>
 							</uib-tab>
 							<uib-tab index="3" heading="Stl / Blk">
-								<canvas id="base" class="chart-bar" chart-data="stlblkData" chart-labels="chartLabels" chart-colors="colors" 
+								<canvas id="base" class="chart-bar visible-md visible-sm" chart-data="stlblkData" chart-labels="chartLabels" chart-colors="colors" 
 								chart-dataset-override="stlblkDatasetOverride" chart-options="options" height="100">
+								</canvas>
+								<canvas id="base" class="chart-bar visible-xs" chart-data="stlblkData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="stlblkDatasetOverride" chart-options="options" height="300">
 								</canvas>
 							</uib-tab>
 							<uib-tab index="4" heading="FG% / 3P%">
-								<canvas id="base" class="chart-bar" chart-data="fgData" chart-labels="chartLabels" chart-colors="colors" 
+								<canvas id="base" class="chart-bar visible-md visible-sm" chart-data="fgData" chart-labels="chartLabels" chart-colors="colors" 
 								chart-dataset-override="fgDatasetOverride" chart-options="options" height="100">
+								</canvas>
+								<canvas id="base" class="chart-bar visible-xs" chart-data="fgData" chart-labels="chartLabels" chart-colors="colors" 
+								chart-dataset-override="fgDatasetOverride" chart-options="options" height="300">
 								</canvas>
 							</uib-tab>
 						</uib-tabset>
@@ -109,7 +121,7 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr dir-paginate="player in averages | orderBy:sortType:sortReverse | itemsPerPage:7" pagination-id="playersTable">
+									<tr dir-paginate="player in averages | orderBy:sortType:sortReverse | itemsPerPage:7" pagination-id="playersTable" class="list-item">
 										<td style="vertical-align: middle;">{{player.name}}</td>
 										<td style="vertical-align: middle;">{{player.team}}</td>
 										<td style="vertical-align: middle;">{{player.gp}}</td>
