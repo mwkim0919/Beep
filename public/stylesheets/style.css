@@ -86,6 +86,11 @@ h3.score-title {
     font-weight: bold;
 }
 
+.playerTable {
+    height: 264px;
+    overflow-y: scroll;
+}
+
 .team-stat {
     margin-left: auto;
     margin-right: auto;
