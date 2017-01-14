@@ -14,7 +14,7 @@ var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
  
 // var mongodbUri = 'mongodb://user:pass@host:port/db';
-var mongodbUri = 'mongodb://heroku_xldkhw2k:mw1030512@ds063134.mlab.com:63134/heroku_xldkhw2k'
+var mongodbUri = 'mongodb://mwkim:mw1030512@ds063134.mlab.com:63134/heroku_xldkhw2k'
  
 mongoose.connect(mongodbUri, options);
 var conn = mongoose.connection;             
