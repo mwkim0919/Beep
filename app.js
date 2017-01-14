@@ -10,7 +10,20 @@ var hash = require('bcrypt-nodejs');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
-mongoose.connect('mongodb://localhost/Beep');
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };       
+ 
+// var mongodbUri = 'mongodb://user:pass@host:port/db';
+var mongodbUri = 'mongodb://heroku_xldkhw2k:mw1030512@ds063134.mlab.com:63134/heroku_xldkhw2k'
+ 
+mongoose.connect(mongodbUri, options);
+var conn = mongoose.connection;             
+ 
+conn.on('error', console.error.bind(console, 'connection error:'));  
+ 
+conn.once('open', function() {
+  // Wait for the database connection to establish, then start the app.                         
+});
 
 var User = require('./models/user.js');
 var Team = require('./models/team.js');
